@@ -1,4 +1,5 @@
 # Personal Portfolio (Renad Elsafi Portfolio) – Assignment 1
+<img width="1256" height="635" alt="Screenshot 2025-09-24 at 12 31 31 PM" src="https://github.com/user-attachments/assets/a51e8747-ee12-470c-9009-87335aeb3604" />
 
 ## About This Project
 This is my first step into building a professional portfolio. It’s a simple, responsive web application that shows who I am, what projects I’ve worked on, and how to contact me.  
