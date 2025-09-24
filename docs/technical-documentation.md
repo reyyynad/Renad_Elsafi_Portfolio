@@ -1,4 +1,4 @@
-# Technical Documentation – Renad Elsafi Portfolio (Assignment 1)
+# Technical Documentation – Renad Elsafi Portfolio 
 
 ## Overview
 This document outlines the technical architecture, design decisions, challenges, and solutions for the personal portfoli (Renad Elsafi Portfolio) web application developed for Assignment 1. The portfolio is a responsive, single-page website showcasing my professional profile, projects, experience, and contact information. It is built using HTML, CSS, and JavaScript, with a focus on clean code, responsive design, and interactivity enhanced by AI-assisted development.

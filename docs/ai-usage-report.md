@@ -1,4 +1,4 @@
-# AI Usage Report – Renad Elsafi Portfolio (Assignment 1)
+# AI Usage Report – Renad Elsafi Portfolio 
 
 # Overview
 Renad Elsafi Portfolio (Assignment 1)
