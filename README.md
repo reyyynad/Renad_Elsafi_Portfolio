@@ -1,4 +1,4 @@
-# Personal Portfolio (Renad Elsafi Portfolio) 
+# Renad Elsafi Portfolio
 <img width="1250" height="430" alt="Screenshot 2025-09-24 at 12 31 31 PM" src="https://github.com/user-attachments/assets/a51e8747-ee12-470c-9009-87335aeb3604" />
 
 ## About This Project
