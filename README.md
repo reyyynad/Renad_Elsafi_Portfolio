@@ -18,7 +18,7 @@ Running this portfolio on your computer is easy:
 
 1. **Clone the repository**
 ```bash
-git clone https://github.com/reyyynad/assignment-1.git
+git clone https://github.com/reyyynad/Renad_Elsafi_Portfolio.git
 ````
 
 2. **Open the project folder in VS CODE or any IDE you use**
@@ -45,6 +45,6 @@ For a more detailed explanation of how AI was used, see [docs/ai-usage-report.md
 ## Live Demo
 
 The website is hosted live at:
-[Your Live Demo Link](https://<your-username>.github.io/assignment-1/)
+https://reyyynad.github.io/Renad_Elsafi_Portfolio/
 
 
