@@ -12,24 +12,25 @@
     />
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
-      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
     <link rel="icon" href="assets/images/favicon.png">
     <title>Renad Elsafi Portfolio</title>
-
+ 
   </head>
   <body>
-    <!-- NAVIGATION BAR  -->
+    <!-- NAVIGATION BAR -->
     <nav>
       <div class="left">
         <a href="#/">Renad Elsafi</a>
       </div>
-
+ 
       <div class="right">
         <a href="#Projects">Projects</a>
+        <a href="#Skills">Skills</a>
         <a href="#Experience">Experience</a>
         <a href="#Contact">Contact</a>
         <button class="theme-toggle" id="themeToggle">
@@ -37,7 +38,7 @@
         </button>
       </div>
     </nav>
-
+ 
     <!-- MAIN -->
     <main>
       <!-- SECTION1: HERO -->
@@ -51,17 +52,17 @@
                 <h1 class="main-title">
                   Builds bridges between people and <span class="highlight">technology</span>...
                 </h1>
-              
+             
                 <!-- Wrap description + read more in a container -->
                 <div class="description-wrapper">
                   <p class="description" id="description">
-                    I am a Junior Computer Science student at KFUPM with a strong passion for data science and mobile app development. 
-                    I enjoy transforming ideas into meaningful, user-centered solutions—whether through building intuitive mobile applications 
-                    or analyzing complex datasets with Python.
+                    I am a Junior Computer Science student at KFUPM with a strong passion for data science and mobile app development.
+                    <span id="moreText" class="more-text">I enjoy transforming ideas into meaningful, user-centered solutions—whether through building intuitive mobile applications
+                    or analyzing complex datasets with Python.</span>
                   </p>
                   <button class="read-more-btn" id="readMoreBtn">Read More</button>
                 </div>
-              
+             
                 <!-- Social links remain outside the description wrapper -->
                 <div class="social-links">
                   <a
@@ -78,7 +79,7 @@
                   </a>
                 </div>
               </div>
-              
+             
             <div class="hero-image">
               <div class="character-container">
                 <img
@@ -91,7 +92,7 @@
           </div>
         </div>
       </section>
-
+ 
       <!-- SECTION2: Projects -->
       <section class="projects-section" id="Projects">
         <div class="projects-container">
@@ -117,10 +118,10 @@
                         <a href="https://github.com/reyyynad/SWE206-KFUPM-Registration-System-Project" class="link-btn">
                             <button class="project-btn">See GITHUB!</button>
                         </a>
-                        
+                       
                     </div>
                 </div>
-                
+               
                 <div class="project-card">
                     <div class="project-visual">
                         <div class="project-icon orange">
@@ -141,14 +142,93 @@
                         <a href="https://github.com/reyyynad/ICS108Project">
                             <button class="project-btn">See GITHUB!</button>
                         </a>
-                        
+                       
                     </div>
                 </div>
-              
+             
             </div>
         </div>
     </section>
+    
+<!-- SECTION: Skills -->
+<section class="skills-section" id="Skills">
+    <div class="skills-container">
+      <h1 class="skills-title">Turning concepts into solutions through modern tech tools</h1>
+      <div class="skills-graphic">
+        <!-- SVG for orbital paths and connecting lines -->
+        <svg class="orbital-svg" viewBox="0 0 1000 700">
+          <!-- Orbital rings -->
+          <ellipse class="orbit-ring ring-1" cx="500" cy="350" rx="450" ry="280" />
+          <ellipse class="orbit-ring ring-2" cx="500" cy="350" rx="380" ry="220" />
+          <ellipse class="orbit-ring ring-3" cx="500" cy="350" rx="310" ry="160" />
+          
+          <!-- Connecting lines (will be drawn dynamically) -->
+          <g class="connection-lines"></g>
+        </svg>
+        
+        <div class="central-orb">
+          <div class="orb-inner"></div>
+          <div class="orb-glow"></div>
+        </div>
+        
+        <!-- Top Row - Main Languages/Frameworks -->
+        <div class="skill-icon top-1" data-skill="Figma">
+          <i class="devicon-figma-plain colored"></i>
+        </div>
+        <div class="skill-icon top-2" data-skill="React">
+          <i class="devicon-react-original colored"></i>
+        </div>
+        <div class="skill-icon top-3" data-skill="Flutter">
+          <i class="devicon-flutter-plain colored"></i>
+        </div>
+        <div class="skill-icon top-4" data-skill="Node.js">
+          <i class="devicon-nodejs-plain colored"></i>
+        </div>
+        <div class="skill-icon top-5" data-skill="Dart">
+          <i class="devicon-dart-plain colored"></i>
+        </div>
+        <div class="skill-icon top-6" data-skill="JavaScript">
+          <i class="devicon-javascript-plain colored"></i>
+        </div>
+        <div class="skill-icon top-7" data-skill="HTML5">
+          <i class="devicon-html5-plain colored"></i>
+        </div>
+        
 
+
+        <!-- Bottom Row - Additional Skills -->
+        <div class="skill-icon bottom-3" data-skill="GitHub">
+          <i class="fab fa-github"></i>
+        </div>
+
+        <div class="skill-icon bottom-5" data-skill="JavaScript">
+          <i class="devicon-javascript-plain colored"></i>
+        </div>
+        <div class="skill-icon bottom-6" data-skill="React">
+          <i class="devicon-react-original colored"></i>
+        </div>
+        <div class="skill-icon bottom-7" data-skill="CSS3">
+          <i class="devicon-css3-plain colored"></i>
+        </div>
+
+        
+        <!-- Far Bottom Row -->
+        <div class="skill-icon far-bottom-1" data-skill="Java">
+          <i class="devicon-java-plain colored"></i>
+        </div>
+        <div class="skill-icon far-bottom-2" data-skill="Python">
+          <i class="devicon-python-plain colored"></i>
+        </div>
+        <div class="skill-icon far-bottom-3" data-skill="SQL">
+          <i class="devicon-mysql-plain colored"></i>
+        </div>
+        <div class="skill-icon far-bottom-4" data-skill="Git">
+          <i class="devicon-git-plain colored"></i>
+        </div>
+      </div>
+    </div>
+  </section>
+ 
       <!-- SECTION3: Experience -->
       <section class="experience-section" id="Experience">
         <div class="experience-container">
@@ -180,7 +260,7 @@
             </div>
         </div>
     </section>
-
+ 
       <!-- SECTION4: Contacts -->
       <section class="contact-section" id="Contact">
         <div class="contact-container">
@@ -191,7 +271,7 @@
                         Have an idea, opportunity, or just want to say hi? I'd love to hear from you
                         and explore what we can create together!
                     </p>
-
+ 
                     <form action="#" method="post" class="card">
                       <div class="form-group">
                         <label for="name">Your name:</label>
@@ -202,7 +282,7 @@
                           placeholder="Your name"
                           required
                         />
-
+ 
                         <label for="email">Your email:</label>
                         <input
                           id="email"
@@ -212,7 +292,7 @@
                           required
                         />
                       </div>
-              
+             
                       <div class="form-group">
                         <label for="message">Your message:</label>
                         <textarea
@@ -223,20 +303,20 @@
                           required
                           minlength="20"
                           maxlength="1000"
-                           
+                          
                         ></textarea>
                         <p id="charCount" class="char-counter">0 / 1000</p>
-
+ 
                       </div>
-              
+             
                       <button type="submit" class="form-button">Send!</button>
                     </form>
-                    
+                   
                     <div class="contact-email">
                         <i class="fas fa-envelope contact-email-icon"></i>
                         <a href="mailto:Renad.elsafi@outlook.com" class="email-text">Renad.elsafi@outlook.com</a>
                     </div>
-                    
+                   
                     <div class="contact-social-links">
                         <a href="https://www.linkedin.com/in/renad-elsafi-a38a61262/" class="contact-social-icon linkedin" target="_blank">
                             <i class="fab fa-linkedin"></i>
@@ -247,10 +327,10 @@
                         <a href="https://x.com/reyyynad" class="contact-social-icon twitter" target="_blank">
                             <i class="fab fa-x-twitter"></i>
                         </a>
-
+ 
                     </div>
                 </div>
-                
+               
                 <div class="contact-visual">
                     <div class="contact-character">
                         <img
@@ -258,7 +338,7 @@
                         alt="Character with laptop illustration"
                         class="character-img"
                       />
-
+ 
                     </div>
                 </div>
             </div>
