@@ -237,3 +237,88 @@ if (textarea && charCount) {
 }
 
 });
+
+// Read More Functionality
+class ReadMore {
+    constructor() {
+        this.btn = document.getElementById('readMoreBtn');
+        this.moreText = document.getElementById('moreText');
+        this.init();
+    }
+    
+    init() {
+        if (this.btn && this.moreText) {
+            this.btn.addEventListener('click', () => this.toggleText());
+        }
+    }
+    
+    toggleText() {
+        if (this.moreText.classList.contains('show')) {
+            this.moreText.classList.remove('show');
+            this.btn.textContent = 'Read More';
+        } else {
+            this.moreText.classList.add('show');
+            this.btn.textContent = 'Read Less';
+        }
+    }
+}
+
+
+// Dynamic Greeting based on time of day
+class DynamicGreeting {
+    constructor() {
+        this.greetingElement = document.querySelector('.greeting');
+        this.init();
+    }
+    
+    init() {
+        if (this.greetingElement) {
+            const greeting = this.getTimeBasedGreeting();
+            const name = '<span class="name">Renad Elsafi</span>';
+            this.greetingElement.innerHTML = `${greeting} I'm ${name}`;
+        }
+    }
+    
+    getTimeBasedGreeting() {
+        const hour = new Date().getHours();
+        
+        if (hour >= 5 && hour < 12) {
+            return 'Good morning!';
+        } else if (hour >= 12 && hour < 17) {
+            return 'Good afternoon!';
+        } else if (hour >= 17 && hour < 21) {
+            return 'Good evening!';
+        } else {
+            return 'Good night!';
+        }
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Initialize Theme Manager
+    const themeManager = new ThemeManager();
+
+    // Initialize Smooth Scrolling
+    const smoothScroll = new SmoothScroll();
+
+    // Initialize Animation Enhancer
+    const animationEnhancer = new AnimationEnhancer();
+
+    // Initialize Dynamic Greeting
+    const dynamicGreeting = new DynamicGreeting();
+
+    // Initialize Read More
+    const readMore = new ReadMore();
+
+    // Character counter for message textarea
+    const textarea = document.getElementById('message');
+    const charCount = document.getElementById('charCount');
+
+    if (textarea && charCount) {
+        textarea.addEventListener('input', () => {
+            charCount.textContent = `${textarea.value.length} / ${textarea.maxLength}`;
+        });
+    }
+
+    console.log('Portfolio initialized with theme system');
+});

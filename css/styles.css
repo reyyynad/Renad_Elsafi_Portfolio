@@ -172,6 +172,13 @@ nav .right a:hover {
     opacity: 0.9;
 }
 
+.description-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* keep text left-aligned */
+  }
+  
+
 .name {
     color: var(--purple-accent);
     font-weight: 600;
@@ -898,3 +905,35 @@ footer {
     color: var(--dot-color);
     text-align: center;
   }
+
+/* Read More Button */
+.more-text {
+    display: none;
+}
+
+.more-text.show {
+    display: inline;
+}
+
+.read-more-btn {
+    background: transparent;
+    color: var(--purple-accent);
+    border: none;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    text-decoration: underline;
+    
+    /* make it appear right below the text */
+    display: inline-block;
+    margin-top: 4px; /* small natural gap */
+    padding: 0;
+  }
+  
+  .read-more-btn:hover {
+    color: var(--text-color);
+  }
+  
+  
