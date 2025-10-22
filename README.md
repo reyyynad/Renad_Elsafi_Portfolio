@@ -106,24 +106,6 @@ The website is fully functional and responsive across devices.
 * **`docs/ai-usage-report.md`** – Detailed log of how AI was used, including prompts, edits, and learning outcomes.
 * **`docs/technical-documentation.md`** – Explains code structure, feature breakdown, and performance considerations.
 
----
-
-## 🧩 Folder Structure
-
-```
-assignment-2/
-├── index.html
-├── css/
-│   └── styles.css
-├── js/
-│   └── script.js
-├── assets/
-│   └── images/
-├── docs/
-│   ├── ai-usage-report.md
-│   └── technical-documentation.md
-└── README.md
-```
 
 ---
 
@@ -144,7 +126,3 @@ Through this assignment, I learned how to:
 This project is developed for **educational purposes** as part of Assignment 2.
 All assets and code belong to **Renad Elsafi** unless otherwise stated.
 
----
-
-Would you like me to also draft the matching **`docs/ai-usage-report.md`** (the required AI documentation file) next?
-It needs to include your prompts, tools, edits, and reflection — worth points in the rubric.
