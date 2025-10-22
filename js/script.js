@@ -504,3 +504,280 @@ document.addEventListener('DOMContentLoaded', () => {
     
     console.log('Portfolio initialized with GitHub integration');
 });
+
+// Update your DOMContentLoaded event to include GitHub integration
+document.addEventListener('DOMContentLoaded', () => {
+    // ... existing code ...
+    
+    // Initialize GitHub Repos
+    const githubRepos = new GitHubRepos();
+    
+    // Initialize AI Message Enhancer
+    const aiEnhancer = new AIMessageEnhancer();
+    
+    console.log('Portfolio initialized with GitHub integration and AI Enhancement');
+});
+
+// AI Message Enhancement Feature
+class AIMessageEnhancer {
+    constructor() {
+        this.messageTextarea = document.getElementById('message');
+        this.aiEnhanceBtn = document.getElementById('aiEnhanceBtn');
+        this.aiOptions = document.getElementById('aiOptions');
+        this.aiSuggestions = document.getElementById('aiSuggestions');
+        this.suggestionContent = document.getElementById('suggestionContent');
+        this.acceptBtn = document.getElementById('acceptSuggestion');
+        this.rejectBtn = document.getElementById('rejectSuggestion');
+        this.closeSuggestion = document.getElementById('closeSuggestion');
+        this.currentSuggestion = '';
+        
+        this.init();
+    }
+    
+    init() {
+        if (!this.aiEnhanceBtn) return;
+        
+        // Toggle AI options
+        this.aiEnhanceBtn.addEventListener('click', () => {
+            const isVisible = this.aiOptions.style.display === 'flex';
+            this.aiOptions.style.display = isVisible ? 'none' : 'flex';
+        });
+        
+        // AI option buttons
+        const optionBtns = document.querySelectorAll('.ai-option-btn');
+        optionBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const action = e.currentTarget.dataset.action;
+                this.enhanceMessage(action);
+            });
+        });
+        
+        // Accept suggestion
+        if (this.acceptBtn) {
+            this.acceptBtn.addEventListener('click', () => {
+                this.messageTextarea.value = this.currentSuggestion;
+                this.messageTextarea.dispatchEvent(new Event('input'));
+                this.hideSuggestions();
+            });
+        }
+        
+        // Reject suggestion
+        if (this.rejectBtn) {
+            this.rejectBtn.addEventListener('click', () => {
+                this.hideSuggestions();
+            });
+        }
+        
+        // Close suggestion
+        if (this.closeSuggestion) {
+            this.closeSuggestion.addEventListener('click', () => {
+                this.hideSuggestions();
+            });
+        }
+    }
+    
+    async enhanceMessage(action) {
+        const message = this.messageTextarea.value.trim();
+        
+        if (!message) {
+            alert('Please write a message first!');
+            return;
+        }
+        
+        // Show loading state
+        this.showLoading();
+        
+        // Simulate AI processing (in real implementation, this would call an AI API)
+        setTimeout(() => {
+            const enhanced = this.simulateAIEnhancement(message, action);
+            this.showSuggestion(enhanced);
+        }, 1500);
+    }
+    
+    simulateAIEnhancement(message, action) {
+        // This simulates AI enhancement. In production, you'd call an actual AI API
+        switch(action) {
+            case 'professional':
+                return this.makeProfessional(message);
+            case 'friendly':
+                return this.makeFriendly(message);
+            case 'concise':
+                return this.makeConcise(message);
+            case 'grammar':
+                return this.fixGrammar(message);
+            default:
+                return message;
+        }
+    }
+    
+    makeProfessional(message) {
+        // Add professional tone enhancements
+        let enhanced = message;
+        
+        // Replace casual greetings
+        enhanced = enhanced.replace(/hi|hey|hello/gi, 'Dear Renad');
+        
+        // Add professional closing if not present
+        if (!enhanced.includes('Regards') && !enhanced.includes('Sincerely')) {
+            enhanced += '\n\nBest regards';
+        }
+        
+        // Capitalize sentences
+        enhanced = enhanced.replace(/(^\w|[.!?]\s+\w)/g, letter => letter.toUpperCase());
+        
+        return enhanced;
+    }
+    
+    makeFriendly(message) {
+        let enhanced = message;
+        
+        // Add friendly greeting if not present
+        if (!enhanced.match(/^(hi|hey|hello)/i)) {
+            enhanced = 'Hi there! ' + enhanced;
+        }
+        
+        // Add enthusiasm
+        enhanced = enhanced.replace(/\./g, (match, offset) => {
+            return Math.random() > 0.7 ? '!' : match;
+        });
+        
+        // Add friendly closing
+        if (!enhanced.includes('Cheers') && !enhanced.includes('Best')) {
+            enhanced += '\n\nLooking forward to hearing from you!';
+        }
+        
+        return enhanced;
+    }
+    
+    makeConcise(message) {
+        let enhanced = message;
+        
+        // Remove redundant words
+        const redundantPhrases = {
+            'in order to': 'to',
+            'due to the fact that': 'because',
+            'at this point in time': 'now',
+            'for the purpose of': 'for',
+            'in the event that': 'if',
+            'a lot of': 'many',
+            'very': ''
+        };
+        
+        Object.entries(redundantPhrases).forEach(([phrase, replacement]) => {
+            const regex = new RegExp(phrase, 'gi');
+            enhanced = enhanced.replace(regex, replacement);
+        });
+        
+        // Remove extra spaces
+        enhanced = enhanced.replace(/\s+/g, ' ').trim();
+        
+        return enhanced;
+    }
+    
+    fixGrammar(message) {
+        let enhanced = message;
+        
+        // Basic grammar fixes
+        // Capitalize first letter of sentences
+        enhanced = enhanced.replace(/(^\w|[.!?]\s+\w)/g, letter => letter.toUpperCase());
+        
+        // Fix common mistakes
+        const corrections = {
+            ' i ': ' I ',
+            "im ": "I'm ",
+            "dont": "don't",
+            "cant": "can't",
+            "wont": "won't",
+            "theyre": "they're",
+            "youre": "you're",
+            "theres": "there's",
+            " ur ": " your ",
+            " u ": " you "
+        };
+        
+        Object.entries(corrections).forEach(([wrong, correct]) => {
+            const regex = new RegExp(wrong, 'gi');
+            enhanced = enhanced.replace(regex, correct);
+        });
+        
+        // Fix double spaces
+        enhanced = enhanced.replace(/\s+/g, ' ');
+        
+        // Ensure proper spacing after punctuation
+        enhanced = enhanced.replace(/([.!?,])(\w)/g, '$1 $2');
+        
+        return enhanced;
+    }
+    
+    showLoading() {
+        this.aiOptions.style.display = 'none';
+        this.aiSuggestions.style.display = 'block';
+        this.suggestionContent.innerHTML = `
+            <div style="display: flex; align-items: center; justify-content: center; gap: 10px;">
+                <div class="ai-loading"></div>
+                <span>AI is enhancing your message...</span>
+            </div>
+        `;
+        this.acceptBtn.style.display = 'none';
+        this.rejectBtn.style.display = 'none';
+    }
+    
+    showSuggestion(enhanced) {
+        this.currentSuggestion = enhanced;
+        this.suggestionContent.textContent = enhanced;
+        this.acceptBtn.style.display = 'inline-flex';
+        this.rejectBtn.style.display = 'inline-flex';
+    }
+    
+    hideSuggestions() {
+        this.aiSuggestions.style.display = 'none';
+        this.aiOptions.style.display = 'none';
+        this.currentSuggestion = '';
+    }
+}
+
+// Typing Animation for Skills Title
+class TypingAnimation {
+    constructor() {
+        this.titleElement = document.getElementById('skillsTitle');
+        this.init();
+    }
+    
+    init() {
+        if (!this.titleElement) return;
+        
+        // Observe when the skills section comes into view
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Start typing animation
+                    this.titleElement.style.maxWidth = '0';
+                    setTimeout(() => {
+                        this.titleElement.style.maxWidth = '100%';
+                    }, 100);
+                    
+                    // Remove cursor after typing completes
+                    setTimeout(() => {
+                        this.titleElement.classList.add('typing-complete');
+                    }, 4500); // 4s animation + 0.5s delay
+                    
+                    // Stop observing after animation starts
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.3 });
+        
+        const skillsSection = document.querySelector('.skills-section');
+        if (skillsSection) {
+            observer.observe(skillsSection);
+        }
+    }
+}
+
+// Initialize Typing Animation in DOMContentLoaded
+document.addEventListener('DOMContentLoaded', () => {
+    // Your existing initializations...
+    
+    // Add Typing Animation
+    const typingAnimation = new TypingAnimation();
+});
