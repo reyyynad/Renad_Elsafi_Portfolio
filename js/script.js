@@ -781,3 +781,93 @@ document.addEventListener('DOMContentLoaded', () => {
     // Add Typing Animation
     const typingAnimation = new TypingAnimation();
 });
+
+// Contact Form Validation
+class ContactFormValidator {
+    constructor() {
+        this.form = document.getElementById('contactForm');
+        this.init();
+    }
+
+    init() {
+        if (this.form) {
+            this.form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                if (this.validateForm()) {
+                    // Simulate successful submission (replace with actual submission logic if needed)
+                    alert('Form submitted successfully!');
+                    this.form.reset();
+                    // Clear character count
+                    document.getElementById('charCount').textContent = '0 / 1000';
+                }
+            });
+        }
+    }
+
+    validateForm() {
+        let valid = true;
+
+        // Name validation
+        const nameInput = document.getElementById('name');
+        const nameValue = nameInput.value.trim();
+        if (!nameValue) {
+            this.showError('name', 'Please enter your name. This field is required.');
+            valid = false;
+        } else {
+            this.clearError('name');
+        }
+
+        // Email validation
+        const emailInput = document.getElementById('email');
+        const emailValue = emailInput.value.trim();
+        if (!emailValue) {
+            this.showError('email', 'Please enter your email. This field is required.');
+            valid = false;
+        } else if (!this.isValidEmail(emailValue)) {
+            this.showError('email', 'Please enter a valid email address (e.g., example@domain.com).');
+            valid = false;
+        } else {
+            this.clearError('email');
+        }
+
+        // Message validation
+        const messageInput = document.getElementById('message');
+        const messageValue = messageInput.value.trim();
+        if (!messageValue) {
+            this.showError('message', 'Please enter your message. This field is required.');
+            valid = false;
+        } else if (messageValue.length < 20) {
+            this.showError('message', 'Your message must be at least 20 characters long. Please add more details.');
+            valid = false;
+        } else {
+            this.clearError('message');
+        }
+
+        return valid;
+    }
+
+    showError(field, message) {
+        const input = document.getElementById(field);
+        const errorElement = document.getElementById(`${field}Error`);
+        input.classList.add('invalid');
+        errorElement.textContent = message;
+    }
+
+    clearError(field) {
+        const input = document.getElementById(field);
+        const errorElement = document.getElementById(`${field}Error`);
+        input.classList.remove('invalid');
+        errorElement.textContent = '';
+    }
+
+    isValidEmail(email) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    // ... existing code ...
+
+    // Initialize Contact Form Validator
+    const contactFormValidator = new ContactFormValidator();
+});

@@ -16,7 +16,6 @@
     --social-icon-border: rgba(255, 255, 255, 0.2);
     --btn-border: rgba(124, 58, 237, 0.5);
     --dot-color: rgba(255, 255, 255, 0.6);
-
 }
 
 /* Light Theme */
@@ -499,9 +498,6 @@ nav .right a:hover {
     justify-content: center;
     position: relative;
     box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3);
-
-
-    
 }
 
 .experience-image {
@@ -667,14 +663,6 @@ nav .right a:hover {
     height: 300px;
 }
 
-.character-avatar {
-    font-size: 120px;
-    animation: float 3s ease-in-out infinite;
-    z-index: 2;
-    position: relative;
-}
-
-
 /* RESPONSIVE DESIGN */
 @media (max-width: 768px) {
     nav {
@@ -814,23 +802,17 @@ nav .right a:hover {
         padding: 25px;
     }
 
-    .character-avatar {
-        font-size: 80px;
-    }
-
     .contact-character {
         width: 200px;
         height: 200px;
     }
 }
 
-
-
-  .form-group { margin-bottom: 12px;}
+.form-group { margin-bottom: 12px;}
 
 label { display: block; font-weight: 600; margin-bottom: 6px; }
 
- .form-button {
+.form-button {
     background: transparent;
     color: var(--text-color);
     border: 2px solid var(--btn-border);
@@ -844,7 +826,7 @@ label { display: block; font-weight: 600; margin-bottom: 6px; }
     transition: all 0.3s ease;
 }
 
- .form-button:hover {
+.form-button:hover {
     background: var(--purple-accent);
     border-color: var(--purple-accent);
     color: white;
@@ -853,16 +835,15 @@ label { display: block; font-weight: 600; margin-bottom: 6px; }
 }
 
 input[type="text"], input[type="email"], textarea, select {
-  width: 100%;
-  padding: 10px 12px;
-  margin-bottom: 12px;
-  border: 1px solid var(--card-border);
-  border-radius: 20px;
-  font: inherit;
-  background-color: transparent;
-  color: var(--text-color);
-  
-
+    width: 100%;
+    padding: 10px 12px;
+    margin-bottom: 4px;
+    border: 1px solid var(--card-border);
+    border-radius: 20px;
+    font: inherit;
+    background-color: transparent;
+    color: var(--text-color);
+    transition: border-color 0.3s ease;
 }
 
 textarea {
@@ -874,22 +855,31 @@ textarea {
     min-height: 120px;
     resize: vertical;
     max-width: 100%;
-  }
-  
+}
 
 input[type="text"]:focus , input[type="email"]:focus , textarea:focus {
-  border-color: var(--purple-accent); 
-  outline: none; /* removes default browser outline */
+    border-color: var(--purple-accent); 
+    outline: none;
 }
 
 .char-counter {
     font-size: 0.9rem;
     opacity: 0.7;
     text-align: right;
-  }
-  
+}
 
+.error-message {
+    display: block;
+    font-size: 12px;
+    color: #EF4444;
+    margin-top: 4px;
+    margin-bottom: 8px;
+    height: 16px;
+}
 
+input.invalid, textarea.invalid {
+    border-color: #EF4444 !important;
+}
 
 footer {
     margin-top: 20px;
@@ -897,39 +887,9 @@ footer {
     padding-top: 12px;
     color: var(--dot-color);
     text-align: center;
-  }
-
-/* Read More Button */
-.more-text {
-    display: none;
-}
-
-.more-text.show {
-    display: inline;
-}
-
-.read-more-btn {
-    background: transparent;
-    color: var(--purple-accent);
-    border: none;
-    padding: 0;
-    margin: 0 5px;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 600;
-    font-size: 14px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-decoration: underline;
-    display: inline;
-    vertical-align: baseline;
-}
-
-.read-more-btn:hover {
-    color: var(--text-color);
 }
 
 /* SKILLS SECTION */
-/* SKILLS SECTION - Streaming Style */
 .skills-section {
     padding: 100px 0;
     background: var(--section-bg-2);
@@ -993,7 +953,7 @@ footer {
     animation-play-state: paused;
 }
 
-/* Skill Item - No Borders, Minimal Style */
+/* Skill Item */
 .skill-item {
     display: flex;
     flex-direction: column;
@@ -1193,6 +1153,7 @@ footer {
                    blink 0.75s step-end infinite;
     }
 }
+
 /* GITHUB SECTION */
 .github-section {
     padding: 100px 50px;
@@ -1447,24 +1408,7 @@ footer {
     transform: translateX(5px);
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-    .github-section {
-        padding: 60px 20px;
-    }
-    
-    .github-title {
-        font-size: 32px;
-    }
-    
-    .repos-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-}
-
-/* AI Enhancement Styles - Add this to the end of your styles.css file */
-
+/* AI Enhancement Styles */
 .message-ai-container {
     position: relative;
 }

@@ -27,8 +27,8 @@
         <a href="#/">Renad Elsafi</a>
       </div>
       <div class="right">
-        <a href="#Projects">Projects</a>
         <a href="#Skills">Skills</a>
+        <a href="#Projects">Projects</a>
         <a href="#Experience">Experience</a>
         <a href="#Contact">Contact</a>
         <button class="theme-toggle" id="themeToggle">
@@ -91,12 +91,6 @@
 
       <section class="skills-section" id="Skills">
         <div class="skills-container">
-             <!-- Option 1: Classic Typewriter Style -->
-    <!-- <h1 class="skills-title">
-        <span class="skills-title-text" id="skillsTitle">Turning concepts into solutions through modern tech tools</span>
-      </h1> -->
-      
-      <!-- Option 2: Glowing Gradient Style (uncomment to use) -->
       
       <h1 class="skills-title glow-style">
         <span class="skills-title-text" id="skillsTitle">Turning concepts into solutions through modern tech tools</span>
@@ -312,7 +306,7 @@
         <!-- Error State -->
         <div class="error-state" id="errorState" style="display: none;">
             <i class="fas fa-exclamation-triangle"></i>
-            <p>Failed to load repositories</p>
+            <p>Oops! Couldn't load repositories. Please check your internet connection and try again.</p>
             <button class="retry-btn" id="retryBtn">
                 <i class="fas fa-redo"></i> Try Again
             </button>
@@ -341,7 +335,7 @@
                         Have an idea, opportunity, or just want to say hi? I'd love to hear from you
                         and explore what we can create together!
                     </p>
-                    <form action="#" method="post" class="card">
+                    <form id="contactForm" action="#" method="post" class="card">
                         <div class="form-group">
                           <label for="name">Your name:</label>
                           <input
@@ -351,6 +345,7 @@
                             placeholder="Your name"
                             required
                           />
+                          <span class="error-message" id="nameError"></span>
                       
                           <label for="email">Your email:</label>
                           <input
@@ -360,6 +355,7 @@
                             placeholder="Your email"
                             required
                           />
+                          <span class="error-message" id="emailError"></span>
                         </div>
                       
                         <div class="form-group">
@@ -374,6 +370,7 @@
                               minlength="20"
                               maxlength="1000"
                             ></textarea>
+                            <span class="error-message" id="messageError"></span>
                             
                             <div class="ai-tools">
                               <button type="button" class="ai-btn" id="aiEnhanceBtn" title="AI Enhancement">
