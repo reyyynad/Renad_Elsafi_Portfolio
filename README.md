@@ -1,6 +1,7 @@
 # Renad Elsafi Portfolio
 
-<img width="1250" height="430" alt="Screenshot 2025-09-24 at 12 31 31 PM" src="https://github.com/user-attachments/assets/a51e8747-ee12-470c-9009-87335aeb3604" />
+<img width="1250" height="430" alt="Screenshot of portfolio" src="assets/images/portfolio.png" />
+
 
 ## 💡 About This Project
 
@@ -126,3 +127,4 @@ Through this assignment, I learned how to:
 This project is developed for **educational purposes** as part of Assignment 2.
 All assets and code belong to **Renad Elsafi** unless otherwise stated.
 
+ 
