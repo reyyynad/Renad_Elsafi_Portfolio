@@ -3,7 +3,7 @@
 
 ### **Assignment 3 – Personal Portfolio Web Application**
 
-This report details the comprehensive use of AI tools—**ChatGPT** and **Claude**—in the development of my personal portfolio web application for Assignment 2. These tools were instrumental in debugging, designing, enhancing interactivity, and integrating advanced dynamic features including GitHub repository fetching, inspirational quotes API, visitor statistics tracking, project filtering/sorting, AI-assisted contact messages, and a sophisticated three-theme system.
+This report details the comprehensive use of AI tools—**ChatGPT** and **Claude**—in the development of my personal portfolio web application for Assignment 3. These tools were instrumental in debugging, designing, enhancing interactivity, and integrating advanced dynamic features including GitHub repository fetching, inspirational quotes API, visitor statistics tracking, project filtering/sorting, AI-assisted contact messages, and a sophisticated three-theme system.
 
 Below, I outline the specific use cases, benefits, challenges, learning outcomes, and how I responsibly adapted AI-generated suggestions to align with the project's goals.
 
