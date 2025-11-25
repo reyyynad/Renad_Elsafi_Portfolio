@@ -14,7 +14,6 @@ class ThemeManager {
     }
    
     init() {
-        // Load saved theme from localStorage
         const savedTheme = localStorage.getItem('theme');
         if (savedTheme && this.themes.includes(savedTheme)) {
             this.currentThemeIndex = this.themes.indexOf(savedTheme);
@@ -23,10 +22,8 @@ class ThemeManager {
         this.applyTheme();
         this.updateIcon();
        
-        // Add event listener for theme toggle
         this.themeToggle.addEventListener('click', () => this.toggleTheme());
        
-        // Add smooth transition after page load
         setTimeout(() => {
             document.body.style.transition = 'all 0.3s ease';
         }, 100);
@@ -37,18 +34,13 @@ class ThemeManager {
         this.applyTheme();
         this.updateIcon();
         this.saveTheme();
-       
-        // Add button animation
         this.animateButton();
     }
    
     applyTheme() {
         const currentTheme = this.themes[this.currentThemeIndex];
-       
-        // Remove all theme classes
         document.body.removeAttribute('data-theme');
        
-        // Apply new theme (purple is default, so no data-theme needed)
         if (currentTheme !== 'purple') {
             document.body.setAttribute('data-theme', currentTheme);
         }
@@ -59,10 +51,7 @@ class ThemeManager {
         const nextTheme = this.themes[(this.currentThemeIndex + 1) % this.themes.length];
         const iconElement = this.themeToggle.querySelector('i');
        
-        // Update icon to show what theme will be next
         iconElement.className = this.themeIcons[nextTheme];
-       
-        // Update button title for accessibility
         this.themeToggle.title = `Switch to ${nextTheme} theme`;
     }
    
@@ -90,7 +79,6 @@ class SmoothScroll {
     }
    
     init() {
-        // Get all navigation links
         const navLinks = document.querySelectorAll('nav a[href^="#"]');
        
         navLinks.forEach(link => {
@@ -101,20 +89,18 @@ class SmoothScroll {
                 const targetElement = document.getElementById(targetId) || document.getElementById('/');
                
                 if (targetElement) {
-                    const offsetTop = targetElement.offsetTop - 80; // Account for navbar height
+                    const offsetTop = targetElement.offsetTop - 80;
                    
                     window.scrollTo({
                         top: offsetTop,
                         behavior: 'smooth'
                     });
                    
-                    // Update active link
                     this.updateActiveLink(link);
                 }
             });
         });
        
-        // Update active link on scroll
         window.addEventListener('scroll', () => this.updateActiveLinkOnScroll());
     }
    
@@ -165,7 +151,6 @@ class AnimationEnhancer {
             });
         }, { threshold: 0.1 });
        
-        // Observe cards and sections
         const elementsToObserve = document.querySelectorAll('.project-card, .experience-card');
         elementsToObserve.forEach(el => observer.observe(el));
     }
@@ -188,7 +173,6 @@ class AnimationEnhancer {
     initSkillsAnimation() {
         const skillIcons = document.querySelectorAll('.skill-icon');
         
-        // Add stagger animation on scroll
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -206,125 +190,40 @@ class AnimationEnhancer {
         if (skillsSection) {
             observer.observe(skillsSection);
         }
-        
-        // Add interactive hover effects
-        skillIcons.forEach(icon => {
-            icon.style.opacity = '0';
-            icon.style.transform = 'scale(0.5)';
-            icon.style.transition = 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
-            
-            // Create connection lines on hover
-            icon.addEventListener('mouseenter', () => {
-                this.createConnectionEffect(icon);
-            });
-        });
-    }
-    
-    createConnectionEffect(icon) {
-        const orb = document.querySelector('.central-orb');
-        const iconRect = icon.getBoundingClientRect();
-        const orbRect = orb.getBoundingClientRect();
-        
-        // Visual pulse effect on the orb
-        orb.style.transform = 'translate(-50%, -50%) scale(1.1)';
-        setTimeout(() => {
-            orb.style.transform = 'translate(-50%, -50%) scale(1)';
-        }, 300);
     }
 }
- 
-// Initialize everything when DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
-    // Initialize theme manager
-    const themeManager = new ThemeManager();
-   
-    // Initialize smooth scrolling
-    const smoothScroll = new SmoothScroll();
-   
-    // Initialize animation enhancer
-    const animationEnhancer = new AnimationEnhancer();
-   
-    // Add CSS for slide-in animation
-    const style = document.createElement('style');
-    style.textContent = `
-        @keyframes slideInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-       
-        .project-card, .experience-card {
-            opacity: 0;
-        }
-       
-        nav a.active {
-            color: var(--purple-accent) !important;
-        }
-       
-        .theme-toggle {
-            transition: all 0.3s ease, transform 0.3s ease;
-        }
-    `;
-    document.head.appendChild(style);
-   
-    console.log('Portfolio initialized with theme system');
- 
-    // Character counter for message textarea
-const textarea = document.getElementById('message');
-const charCount = document.getElementById('charCount');
- 
-if (textarea && charCount) {
-  textarea.addEventListener('input', () => {
-    charCount.textContent = `${textarea.value.length} / ${textarea.maxLength}`;
-  });
-}
- 
-});
- 
-// Read More Functionality
-class ReadMore {
-    constructor() {
-        this.btn = document.getElementById('readMoreBtn');
-        this.moreText = document.getElementById('moreText');
-        this.init();
-    }
-   
-    init() {
-        if (this.btn && this.moreText) {
-            this.btn.addEventListener('click', () => this.toggleText());
-        }
-    }
-   
-    toggleText() {
-        if (this.moreText.classList.contains('show')) {
-            this.moreText.classList.remove('show');
-            this.btn.textContent = 'Read More';
-        } else {
-            this.moreText.classList.add('show');
-            this.btn.textContent = 'Read Less';
-        }
-    }
-}
- 
- 
+
 // Dynamic Greeting based on time of day
 class DynamicGreeting {
     constructor() {
-        this.greetingElement = document.querySelector('.greeting');
+        this.greetingElement = document.getElementById('dynamicGreeting');
         this.init();
     }
    
     init() {
         if (this.greetingElement) {
+            const userName = localStorage.getItem('visitorName');
             const greeting = this.getTimeBasedGreeting();
-            const name = '<span class="name">Renad Elsafi</span>';
-            this.greetingElement.innerHTML = `${greeting} I'm ${name}`;
+            const name = userName || '<span class="name">Renad Elsafi</span>';
+            
+            if (userName) {
+                this.greetingElement.innerHTML = `${greeting} <span class="name">${userName}</span>! Welcome back to my portfolio.`;
+            } else {
+                this.greetingElement.innerHTML = `${greeting} I'm ${name}`;
+                this.promptForName();
+            }
         }
+    }
+    
+    promptForName() {
+        setTimeout(() => {
+            const name = prompt("Hi there! What's your name? (Optional)");
+            if (name && name.trim()) {
+                localStorage.setItem('visitorName', name.trim());
+                const greeting = this.getTimeBasedGreeting();
+                this.greetingElement.innerHTML = `${greeting} <span class="name">${name.trim()}</span>! Welcome to my portfolio.`;
+            }
+        }, 3000);
     }
    
     getTimeBasedGreeting() {
@@ -341,35 +240,137 @@ class DynamicGreeting {
         }
     }
 }
- 
-document.addEventListener('DOMContentLoaded', () => {
-    // Initialize Theme Manager
-    const themeManager = new ThemeManager();
- 
-    // Initialize Smooth Scrolling
-    const smoothScroll = new SmoothScroll();
- 
-    // Initialize Animation Enhancer
-    const animationEnhancer = new AnimationEnhancer();
- 
-    // Initialize Dynamic Greeting
-    const dynamicGreeting = new DynamicGreeting();
- 
-    // Initialize Read More
-    const readMore = new ReadMore();
- 
-    // Character counter for message textarea
-    const textarea = document.getElementById('message');
-    const charCount = document.getElementById('charCount');
- 
-    if (textarea && charCount) {
-        textarea.addEventListener('input', () => {
-            charCount.textContent = `${textarea.value.length} / ${textarea.maxLength}`;
-        });
+
+// Visitor Statistics Tracker
+class VisitorTracker {
+    constructor() {
+        this.timeCounter = document.getElementById('timeCounter');
+        this.visitCount = document.getElementById('visitCount');
+        this.startTime = Date.now();
+        this.init();
     }
- 
-    console.log('Portfolio initialized with theme system');
-});
+    
+    init() {
+        // Track visit count
+        let visits = parseInt(localStorage.getItem('visitCount')) || 0;
+        visits++;
+        localStorage.setItem('visitCount', visits);
+        if (this.visitCount) {
+            this.visitCount.textContent = visits;
+        }
+        
+        // Start time counter
+        this.startTimeCounter();
+    }
+    
+    startTimeCounter() {
+        if (!this.timeCounter) return;
+        
+        setInterval(() => {
+            const elapsed = Math.floor((Date.now() - this.startTime) / 1000);
+            const minutes = Math.floor(elapsed / 60);
+            const seconds = elapsed % 60;
+            this.timeCounter.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+        }, 1000);
+    }
+}
+
+// Project Filter and Sort System
+class ProjectManager {
+    constructor() {
+        this.projectsGrid = document.getElementById('projectsGrid');
+        this.categoryFilter = document.getElementById('categoryFilter');
+        this.sortSelect = document.getElementById('sortProjects');
+        this.projects = [];
+        this.init();
+    }
+    
+    init() {
+        if (!this.projectsGrid) return;
+        
+        // Get all project cards
+        this.projects = Array.from(document.querySelectorAll('.project-card'));
+        
+        // Add event listeners
+        if (this.categoryFilter) {
+            this.categoryFilter.addEventListener('change', () => this.filterAndSort());
+        }
+        
+        if (this.sortSelect) {
+            this.sortSelect.addEventListener('change', () => this.filterAndSort());
+        }
+    }
+    
+    filterAndSort() {
+        const category = this.categoryFilter.value;
+        const sortBy = this.sortSelect.value;
+        
+        // Filter projects
+        let filteredProjects = this.projects.filter(project => {
+            if (category === 'all') return true;
+            return project.dataset.category === category;
+        });
+        
+        // Sort projects
+        filteredProjects.sort((a, b) => {
+            switch(sortBy) {
+                case 'date-desc':
+                    return new Date(b.dataset.date) - new Date(a.dataset.date);
+                case 'date-asc':
+                    return new Date(a.dataset.date) - new Date(b.dataset.date);
+                case 'name-asc':
+                    return a.dataset.name.localeCompare(b.dataset.name);
+                case 'name-desc':
+                    return b.dataset.name.localeCompare(a.dataset.name);
+                default:
+                    return 0;
+            }
+        });
+        
+        // Hide all projects first
+        this.projects.forEach(project => {
+            project.style.display = 'none';
+            project.style.animation = 'none';
+        });
+        
+        // Show filtered and sorted projects with animation
+        filteredProjects.forEach((project, index) => {
+            setTimeout(() => {
+                project.style.display = 'flex';
+                project.style.animation = 'slideInUp 0.6s ease forwards';
+            }, index * 100);
+        });
+        
+        // Show message if no projects match
+        if (filteredProjects.length === 0) {
+            this.showNoResultsMessage();
+        } else {
+            this.hideNoResultsMessage();
+        }
+    }
+    
+    showNoResultsMessage() {
+        let message = document.getElementById('noResultsMessage');
+        if (!message) {
+            message = document.createElement('div');
+            message.id = 'noResultsMessage';
+            message.className = 'no-results';
+            message.innerHTML = `
+                <i class="fas fa-search"></i>
+                <p>No projects found for this category.</p>
+            `;
+            this.projectsGrid.appendChild(message);
+        }
+        message.style.display = 'block';
+    }
+    
+    hideNoResultsMessage() {
+        const message = document.getElementById('noResultsMessage');
+        if (message) {
+            message.style.display = 'none';
+        }
+    }
+}
 
 // GitHub API Integration
 class GitHubRepos {
@@ -394,7 +395,6 @@ class GitHubRepos {
     
     async fetchRepositories() {
         try {
-            // Show loading state
             this.showLoading();
             
             const response = await fetch(this.apiUrl + '?sort=updated&per_page=6');
@@ -425,7 +425,6 @@ class GitHubRepos {
     }
     
     displayRepositories(repos) {
-        // Hide loading state
         if (this.loadingState) this.loadingState.style.display = 'none';
         if (this.errorState) this.errorState.style.display = 'none';
         
@@ -495,28 +494,72 @@ class GitHubRepos {
     }
 }
 
-// Update your DOMContentLoaded event to include GitHub integration
-document.addEventListener('DOMContentLoaded', () => {
-    // ... existing code ...
+// Quotes API Integration
+class QuotesManager {
+    constructor() {
+        this.quoteCard = document.getElementById('quoteCard');
+        this.quoteLoading = document.getElementById('quoteLoading');
+        this.quoteContent = document.getElementById('quoteContent');
+        this.quoteText = document.getElementById('quoteText');
+        this.quoteAuthor = document.getElementById('quoteAuthor');
+        this.refreshBtn = document.getElementById('refreshQuote');
+        
+        this.init();
+    }
     
-    // Initialize GitHub Repos
-    const githubRepos = new GitHubRepos();
+    init() {
+        if (!this.quoteCard) return;
+        
+        this.fetchQuote();
+        
+        if (this.refreshBtn) {
+            this.refreshBtn.addEventListener('click', () => {
+                this.refreshBtn.classList.add('rotating');
+                this.fetchQuote();
+                setTimeout(() => {
+                    this.refreshBtn.classList.remove('rotating');
+                }, 600);
+            });
+        }
+    }
     
-    console.log('Portfolio initialized with GitHub integration');
-});
-
-// Update your DOMContentLoaded event to include GitHub integration
-document.addEventListener('DOMContentLoaded', () => {
-    // ... existing code ...
+    async fetchQuote() {
+        try {
+            this.showLoading();
+            
+            // Using quotable.io API (free, no auth required)
+            const response = await fetch('https://api.quotable.io/random?tags=technology,inspirational,success');
+            
+            if (!response.ok) {
+                throw new Error('Failed to fetch quote');
+            }
+            
+            const data = await response.json();
+            this.displayQuote(data.content, data.author);
+            
+        } catch (error) {
+            console.error('Error fetching quote:', error);
+            this.displayQuote(
+                'The only way to do great work is to love what you do.',
+                'Steve Jobs'
+            );
+        }
+    }
     
-    // Initialize GitHub Repos
-    const githubRepos = new GitHubRepos();
+    showLoading() {
+        if (this.quoteLoading) this.quoteLoading.style.display = 'block';
+        if (this.quoteContent) this.quoteContent.style.display = 'none';
+    }
     
-    // Initialize AI Message Enhancer
-    const aiEnhancer = new AIMessageEnhancer();
-    
-    console.log('Portfolio initialized with GitHub integration and AI Enhancement');
-});
+    displayQuote(text, author) {
+        setTimeout(() => {
+            if (this.quoteLoading) this.quoteLoading.style.display = 'none';
+            if (this.quoteContent) this.quoteContent.style.display = 'block';
+            if (this.quoteText) this.quoteText.textContent = `"${text}"`;
+            if (this.quoteAuthor) this.quoteAuthor.textContent = `— ${author}`;
+        }, 500);
+    }
+}
 
 // AI Message Enhancement Feature
 class AIMessageEnhancer {
@@ -537,13 +580,11 @@ class AIMessageEnhancer {
     init() {
         if (!this.aiEnhanceBtn) return;
         
-        // Toggle AI options
         this.aiEnhanceBtn.addEventListener('click', () => {
             const isVisible = this.aiOptions.style.display === 'flex';
             this.aiOptions.style.display = isVisible ? 'none' : 'flex';
         });
         
-        // AI option buttons
         const optionBtns = document.querySelectorAll('.ai-option-btn');
         optionBtns.forEach(btn => {
             btn.addEventListener('click', (e) => {
@@ -552,7 +593,6 @@ class AIMessageEnhancer {
             });
         });
         
-        // Accept suggestion
         if (this.acceptBtn) {
             this.acceptBtn.addEventListener('click', () => {
                 this.messageTextarea.value = this.currentSuggestion;
@@ -561,14 +601,12 @@ class AIMessageEnhancer {
             });
         }
         
-        // Reject suggestion
         if (this.rejectBtn) {
             this.rejectBtn.addEventListener('click', () => {
                 this.hideSuggestions();
             });
         }
         
-        // Close suggestion
         if (this.closeSuggestion) {
             this.closeSuggestion.addEventListener('click', () => {
                 this.hideSuggestions();
@@ -584,10 +622,8 @@ class AIMessageEnhancer {
             return;
         }
         
-        // Show loading state
         this.showLoading();
         
-        // Simulate AI processing (in real implementation, this would call an AI API)
         setTimeout(() => {
             const enhanced = this.simulateAIEnhancement(message, action);
             this.showSuggestion(enhanced);
@@ -595,7 +631,6 @@ class AIMessageEnhancer {
     }
     
     simulateAIEnhancement(message, action) {
-        // This simulates AI enhancement. In production, you'd call an actual AI API
         switch(action) {
             case 'professional':
                 return this.makeProfessional(message);
@@ -611,37 +646,28 @@ class AIMessageEnhancer {
     }
     
     makeProfessional(message) {
-        // Add professional tone enhancements
         let enhanced = message;
-        
-        // Replace casual greetings
         enhanced = enhanced.replace(/hi|hey|hello/gi, 'Dear Renad');
         
-        // Add professional closing if not present
         if (!enhanced.includes('Regards') && !enhanced.includes('Sincerely')) {
             enhanced += '\n\nBest regards';
         }
         
-        // Capitalize sentences
         enhanced = enhanced.replace(/(^\w|[.!?]\s+\w)/g, letter => letter.toUpperCase());
-        
         return enhanced;
     }
     
     makeFriendly(message) {
         let enhanced = message;
         
-        // Add friendly greeting if not present
         if (!enhanced.match(/^(hi|hey|hello)/i)) {
             enhanced = 'Hi there! ' + enhanced;
         }
         
-        // Add enthusiasm
         enhanced = enhanced.replace(/\./g, (match, offset) => {
             return Math.random() > 0.7 ? '!' : match;
         });
         
-        // Add friendly closing
         if (!enhanced.includes('Cheers') && !enhanced.includes('Best')) {
             enhanced += '\n\nLooking forward to hearing from you!';
         }
@@ -652,7 +678,6 @@ class AIMessageEnhancer {
     makeConcise(message) {
         let enhanced = message;
         
-        // Remove redundant words
         const redundantPhrases = {
             'in order to': 'to',
             'due to the fact that': 'because',
@@ -668,20 +693,14 @@ class AIMessageEnhancer {
             enhanced = enhanced.replace(regex, replacement);
         });
         
-        // Remove extra spaces
         enhanced = enhanced.replace(/\s+/g, ' ').trim();
-        
         return enhanced;
     }
     
     fixGrammar(message) {
         let enhanced = message;
-        
-        // Basic grammar fixes
-        // Capitalize first letter of sentences
         enhanced = enhanced.replace(/(^\w|[.!?]\s+\w)/g, letter => letter.toUpperCase());
         
-        // Fix common mistakes
         const corrections = {
             ' i ': ' I ',
             "im ": "I'm ",
@@ -700,10 +719,7 @@ class AIMessageEnhancer {
             enhanced = enhanced.replace(regex, correct);
         });
         
-        // Fix double spaces
         enhanced = enhanced.replace(/\s+/g, ' ');
-        
-        // Ensure proper spacing after punctuation
         enhanced = enhanced.replace(/([.!?,])(\w)/g, '$1 $2');
         
         return enhanced;
@@ -736,52 +752,6 @@ class AIMessageEnhancer {
     }
 }
 
-// Typing Animation for Skills Title
-class TypingAnimation {
-    constructor() {
-        this.titleElement = document.getElementById('skillsTitle');
-        this.init();
-    }
-    
-    init() {
-        if (!this.titleElement) return;
-        
-        // Observe when the skills section comes into view
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    // Start typing animation
-                    this.titleElement.style.maxWidth = '0';
-                    setTimeout(() => {
-                        this.titleElement.style.maxWidth = '100%';
-                    }, 100);
-                    
-                    // Remove cursor after typing completes
-                    setTimeout(() => {
-                        this.titleElement.classList.add('typing-complete');
-                    }, 4500); // 4s animation + 0.5s delay
-                    
-                    // Stop observing after animation starts
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.3 });
-        
-        const skillsSection = document.querySelector('.skills-section');
-        if (skillsSection) {
-            observer.observe(skillsSection);
-        }
-    }
-}
-
-// Initialize Typing Animation in DOMContentLoaded
-document.addEventListener('DOMContentLoaded', () => {
-    // Your existing initializations...
-    
-    // Add Typing Animation
-    const typingAnimation = new TypingAnimation();
-});
-
 // Contact Form Validation
 class ContactFormValidator {
     constructor() {
@@ -794,10 +764,8 @@ class ContactFormValidator {
             this.form.addEventListener('submit', (e) => {
                 e.preventDefault();
                 if (this.validateForm()) {
-                    // Simulate successful submission (replace with actual submission logic if needed)
                     alert('Form submitted successfully!');
                     this.form.reset();
-                    // Clear character count
                     document.getElementById('charCount').textContent = '0 / 1000';
                 }
             });
@@ -807,7 +775,6 @@ class ContactFormValidator {
     validateForm() {
         let valid = true;
 
-        // Name validation
         const nameInput = document.getElementById('name');
         const nameValue = nameInput.value.trim();
         if (!nameValue) {
@@ -817,7 +784,6 @@ class ContactFormValidator {
             this.clearError('name');
         }
 
-        // Email validation
         const emailInput = document.getElementById('email');
         const emailValue = emailInput.value.trim();
         if (!emailValue) {
@@ -830,7 +796,6 @@ class ContactFormValidator {
             this.clearError('email');
         }
 
-        // Message validation
         const messageInput = document.getElementById('message');
         const messageValue = messageInput.value.trim();
         if (!messageValue) {
@@ -865,9 +830,47 @@ class ContactFormValidator {
     }
 }
 
+// Initialize everything when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-    // ... existing code ...
+    // Initialize Theme Manager
+    const themeManager = new ThemeManager();
 
+    // Initialize Smooth Scrolling
+    const smoothScroll = new SmoothScroll();
+
+    // Initialize Animation Enhancer
+    const animationEnhancer = new AnimationEnhancer();
+
+    // Initialize Dynamic Greeting with Visitor Name
+    const dynamicGreeting = new DynamicGreeting();
+    
+    // Initialize Visitor Tracker (Time counter & Visit count)
+    const visitorTracker = new VisitorTracker();
+    
+    // Initialize Project Filter and Sort System
+    const projectManager = new ProjectManager();
+
+    // Initialize GitHub Repos
+    const githubRepos = new GitHubRepos();
+    
+    // Initialize Quotes Manager
+    const quotesManager = new QuotesManager();
+
+    // Initialize AI Message Enhancer
+    const aiEnhancer = new AIMessageEnhancer();
+    
     // Initialize Contact Form Validator
     const contactFormValidator = new ContactFormValidator();
+
+    // Character counter for message textarea
+    const textarea = document.getElementById('message');
+    const charCount = document.getElementById('charCount');
+
+    if (textarea && charCount) {
+        textarea.addEventListener('input', () => {
+            charCount.textContent = `${textarea.value.length} / ${textarea.maxLength}`;
+        });
+    }
+
+    console.log('Portfolio initialized with all advanced features');
 });
