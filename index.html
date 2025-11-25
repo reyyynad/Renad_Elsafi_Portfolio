@@ -44,7 +44,7 @@
         <div class="hero-container">
           <div class="hero-content">
             <div class="hero-text">
-                <h2 class="greeting">
+                <h2 class="greeting" id="dynamicGreeting">
                   Hello! I'm <span class="name">Renad Elsafi</span>
                 </h2>
                 <h1 class="main-title">
@@ -88,6 +88,17 @@
         </div>
       </section>
 
+      <!-- VISITOR STATS -->
+      <div class="visitor-stats" id="visitorStats">
+        <div class="stat-item">
+          <i class="fas fa-clock"></i>
+          <span>Time on site: <strong id="timeCounter">0:00</strong></span>
+        </div>
+        <div class="stat-item">
+          <i class="fas fa-eye"></i>
+          <span>Visits: <strong id="visitCount">1</strong></span>
+        </div>
+      </div>
 
       <section class="skills-section" id="Skills">
         <div class="skills-container">
@@ -201,8 +212,36 @@
       <section class="projects-section" id="Projects">
         <div class="projects-container">
             <h1 class="projects-title">Projects</h1>
-            <div class="projects-grid">
-                <div class="project-card">
+            
+            <!-- Filter and Sort Controls -->
+            <div class="project-controls">
+                <div class="filter-group">
+                    <label for="categoryFilter">
+                        <i class="fas fa-filter"></i> Filter by Category:
+                    </label>
+                    <select id="categoryFilter">
+                        <option value="all">All Projects</option>
+                        <option value="software">Software Engineering</option>
+                        <option value="oop">Object-Oriented Programming</option>
+                        <option value="web">Web Development</option>
+                    </select>
+                </div>
+                
+                <div class="sort-group">
+                    <label for="sortProjects">
+                        <i class="fas fa-sort"></i> Sort by:
+                    </label>
+                    <select id="sortProjects">
+                        <option value="date-desc">Newest First</option>
+                        <option value="date-asc">Oldest First</option>
+                        <option value="name-asc">Name (A-Z)</option>
+                        <option value="name-desc">Name (Z-A)</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="projects-grid" id="projectsGrid">
+                <div class="project-card" data-category="software" data-date="2024-05" data-name="KFUPM Registration System">
                     <div class="project-visual">
                         <div class="project-icon">
                             <img src="assets/images/bulb.png" alt="Project icon" class="project-image">
@@ -216,17 +255,18 @@
                     </div>
                     <div class="project-content">
                         <h2 class="project-title">KFUPM Registration System</h2>
+                        <span class="project-category">Software Engineering</span>
+                        <span class="project-date">May 2024</span>
                         <ul class="project-features">
                             <li>The KFUPM Registration System is a software application developed as part of the SWE-206: Introduction to Software Engineering course project. The system aims to streamline the reservation process and provide a user-friendly interface for efficient management of activities.</li>
                         </ul>
                         <a href="https://github.com/reyyynad/SWE206-KFUPM-Registration-System-Project" class="link-btn">
                             <button class="project-btn">See GITHUB!</button>
                         </a>
-                       
                     </div>
                 </div>
                
-                <div class="project-card">
+                <div class="project-card" data-category="oop" data-date="2023-12" data-name="Facelite">
                     <div class="project-visual">
                         <div class="project-icon orange">
                             <img src="assets/images/bulb.png" alt="Project icon" class="project-image">
@@ -240,16 +280,41 @@
                     </div>
                     <div class="project-content">
                         <h2 class="project-title">Facelite</h2>
+                        <span class="project-category">Object-Oriented Programming</span>
+                        <span class="project-date">December 2023</span>
                         <ul class="project-features">
                             <li>FaceLite is a social networking application that was developed as part of the ICS-108: Object-Oriented Programming course project.</li>
                         </ul>
                         <a href="https://github.com/reyyynad/ICS108Project">
                             <button class="project-btn">See GITHUB!</button>
                         </a>
-                       
                     </div>
                 </div>
-             
+
+                <div class="project-card" data-category="web" data-date="2024-11" data-name="Portfolio Website">
+                    <div class="project-visual">
+                        <div class="project-icon teal">
+                            <img src="assets/images/bulb.png" alt="Project icon" class="project-image">
+                        </div>
+                        <div class="decorative-dots">
+                            <div class="dot dot-1"></div>
+                            <div class="dot dot-2"></div>
+                            <div class="dot dot-3"></div>
+                            <div class="dot dot-4"></div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h2 class="project-title">Portfolio Website</h2>
+                        <span class="project-category">Web Development</span>
+                        <span class="project-date">November 2024</span>
+                        <ul class="project-features">
+                            <li>A modern, responsive portfolio website built with HTML, CSS, and JavaScript featuring API integration and advanced state management.</li>
+                        </ul>
+                        <a href="https://github.com/reyyynad/Renad_Elsafi_Portfolio">
+                            <button class="project-btn">See GITHUB!</button>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -431,11 +496,6 @@
                         <a href="https://github.com/reyyynad" class="contact-social-icon github" target="_blank">
                             <i class="fab fa-github"></i>
                         </a>
-                        <!-- <a href="https://x.com/reyyynad" class="contact-social-icon twitter" target="_blank">
-                            <i class="fab fa-x-twitter"></i>
-                          </a> -->
-                          
- 
                     </div>
                 </div>
                
@@ -452,6 +512,32 @@
             </div>
         </div>
     </section>
+
+    <!-- QUOTES SECTION -->
+    <section class="quotes-section" id="Quotes">
+        <div class="quotes-container">
+            <h2 class="quotes-title">
+                <i class="fas fa-quote-left"></i> Daily Inspiration
+            </h2>
+            
+            <div class="quote-card" id="quoteCard">
+                <div class="quote-loading" id="quoteLoading">
+                    <div class="spinner-small"></div>
+                    <p>Loading inspiration...</p>
+                </div>
+                
+                <div class="quote-content" id="quoteContent" style="display: none;">
+                    <p class="quote-text" id="quoteText"></p>
+                    <p class="quote-author" id="quoteAuthor"></p>
+                </div>
+                
+                <button class="refresh-quote-btn" id="refreshQuote" title="Get New Quote">
+                    <i class="fas fa-sync-alt"></i> New Quote
+                </button>
+            </div>
+        </div>
+    </section>
+
     <footer>
       <p>© 2025 Renad Elsafi</p>
     </footer>
