@@ -2,9 +2,9 @@
 
 ## **Overview**
 
-This document presents the technical architecture, design decisions, implementation details, challenges, and solutions for the **Renad Elsafi Portfolio**, created for **Assignment 2**. The project is a fully responsive, interactive single-page website that highlights my profile, skills, projects, experience, and contact information. It is built using HTML5, CSS3, and modern JavaScript (ES6+), with emphasis on clean code, responsiveness, interactivity, and dynamic data integrations.
+This document presents the technical architecture, design decisions, implementation details, challenges, and solutions for the **Renad Elsafi Portfolio**, created for **Assignment 3**. The project is a fully responsive, interactive single-page website that highlights my profile, skills, projects, experience, and contact information. It is built using HTML5, CSS3, and modern JavaScript (ES6+), with emphasis on clean code, responsiveness, interactivity, and dynamic data integrations.
 
-**Key features implemented in Assignment 2 include:**
+**Key features implemented in Assignment 3 include:**
 
 * **Three-theme system** (purple, light, dark) with persistent preferences via localStorage
 * **Dynamic GitHub repository display** using the GitHub API
@@ -26,7 +26,7 @@ The portfolio uses a modular, object-oriented, single-page architecture with sep
 ### **File Structure**
 
 ```
-assignment-2/
+Renad_Elsafi_Portfolio/
 ├── index.html                  
 ├── css/
 │   └── styles.css              
@@ -34,14 +34,10 @@ assignment-2/
 │   └── script.js               
 ├── assets/
 │   └── images/
-│       ├── labtop_image.png
-│       ├── bulb.png
-│       ├── rocket.png
-│       ├── contact_image.png
-│       └── favicon.png
 ├── docs/
 │   ├── ai-usage-report.md
-│   └── technical-documentation.md
+│   └── technical-documentation.md  
+    └── api-integration-report.md
 └── .gitignore
 ```
 
@@ -422,19 +418,4 @@ Includes:
 * Custom domain support
 * SSL
 * SEO metadata and OG tags
-
----
-
-## **Conclusion**
-
-The **Renad Elsafi Portfolio** demonstrates advanced front-end development skills through:
-
-* Clean and modular architecture
-* Responsive and accessible design
-* Dynamic integrations with external APIs
-* Engaging UI/UX through animations
-* AI-assisted contact form
-* Persistent user data and theming
-
-The result is a professional, scalable, and visually polished web application that fully meets Assignment 2 requirements while showcasing comprehensive modern web development techniques.
 
