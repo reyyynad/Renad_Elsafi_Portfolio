@@ -824,6 +824,64 @@ label { display: block; font-weight: 600; margin-bottom: 6px; }
     letter-spacing: 1px;
     cursor: pointer;
     transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-width: 120px;
+}
+
+.form-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.form-button:hover:not(:disabled) {
+    background: var(--purple-accent);
+    border-color: var(--purple-accent);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(124, 58, 237, 0.4);
+}
+
+/* Form Messages */
+.form-message {
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    animation: slideInUp 0.4s ease;
+    backdrop-filter: blur(10px);
+}
+
+.success-message {
+    background: rgba(34, 197, 94, 0.15);
+    border: 1px solid rgba(34, 197, 94, 0.3);
+    color: var(--text-color);
+}
+
+.success-message i {
+    font-size: 24px;
+    color: #22C55E;
+}
+
+.error-message-alert {
+    background: rgba(239, 68, 68, 0.15);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    color: var(--text-color);
+}
+
+.error-message-alert i {
+    font-size: 24px;
+    color: #EF4444;
+}
+
+.form-message p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.5;
 }
 
 .form-button:hover {

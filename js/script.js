@@ -751,8 +751,7 @@ class AIMessageEnhancer {
         this.currentSuggestion = '';
     }
 }
-
-// Contact Form Validation
+// Contact Form Validation and Submission
 class ContactFormValidator {
     constructor() {
         this.form = document.getElementById('contactForm');
@@ -760,76 +759,107 @@ class ContactFormValidator {
     }
 
     init() {
-        if (this.form) {
-            this.form.addEventListener('submit', (e) => {
-                e.preventDefault();
-                if (this.validateForm()) {
-                    alert('Form submitted successfully!');
-                    this.form.reset();
-                    document.getElementById('charCount').textContent = '0 / 1000';
-                }
-            });
-        }
+        if (!this.form) return;
+
+        // Fix: Get the button AFTER confirming form exists
+        this.submitBtn = this.form.querySelector('.form-button');
+        this.originalBtnText = this.submitBtn ? this.submitBtn.textContent.trim() : 'Send!';
+
+        this.form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            if (this.validateForm()) {
+                await this.submitForm();
+            }
+        });
     }
 
     validateForm() {
-        let valid = true;
+        let isValid = true;
+        
+        // Simple required check (you can add more if you want)
+        const name = this.form.querySelector('#name');
+        const email = this.form.querySelector('#email');
+        const message = this.form.querySelector('#message');
 
-        const nameInput = document.getElementById('name');
-        const nameValue = nameInput.value.trim();
-        if (!nameValue) {
-            this.showError('name', 'Please enter your name. This field is required.');
-            valid = false;
+        if (!name.value.trim()) {
+            this.showError('name', 'Please enter your name');
+            isValid = false;
         } else {
             this.clearError('name');
         }
 
-        const emailInput = document.getElementById('email');
-        const emailValue = emailInput.value.trim();
-        if (!emailValue) {
-            this.showError('email', 'Please enter your email. This field is required.');
-            valid = false;
-        } else if (!this.isValidEmail(emailValue)) {
-            this.showError('email', 'Please enter a valid email address (e.g., example@domain.com).');
-            valid = false;
+        if (!email.value.trim() || !email.value.includes('@')) {
+            this.showError('email', 'Please enter a valid email');
+            isValid = false;
         } else {
             this.clearError('email');
         }
 
-        const messageInput = document.getElementById('message');
-        const messageValue = messageInput.value.trim();
-        if (!messageValue) {
-            this.showError('message', 'Please enter your message. This field is required.');
-            valid = false;
-        } else if (messageValue.length < 20) {
-            this.showError('message', 'Your message must be at least 20 characters long. Please add more details.');
-            valid = false;
+        if (!message.value.trim() || message.value.length < 20) {
+            this.showError('message', 'Message must be at least 20 characters');
+            isValid = false;
         } else {
             this.clearError('message');
         }
 
-        return valid;
+        return isValid;
     }
 
     showError(field, message) {
+        const errorEl = document.getElementById(field + 'Error');
+        if (errorEl) errorEl.textContent = message;
         const input = document.getElementById(field);
-        const errorElement = document.getElementById(`${field}Error`);
-        input.classList.add('invalid');
-        errorElement.textContent = message;
+        if (input) input.classList.add('invalid');
     }
 
     clearError(field) {
+        const errorEl = document.getElementById(field + 'Error');
+        if (errorEl) errorEl.textContent = '';
         const input = document.getElementById(field);
-        const errorElement = document.getElementById(`${field}Error`);
-        input.classList.remove('invalid');
-        errorElement.textContent = '';
+        if (input) input.classList.remove('invalid');
     }
 
-    isValidEmail(email) {
-        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    async submitForm() {
+        if (!this.submitBtn) return;
+
+        try {
+            this.submitBtn.disabled = true;
+            this.submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+
+            const formData = new FormData(this.form);
+
+            const response = await fetch(this.form.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+
+            if (response.ok) {
+                alert('Yay! Message sent successfully! Thank you for reaching out. I\'ll get back to you soon!');
+                this.form.reset();
+                document.getElementById('charCount').textContent = '0 / 1000';
+                this.clearError('name');
+                this.clearError('email');
+                this.clearError('message');
+            } else {
+                const data = await response.json();
+                const errorMsg = data.errors ? data.errors.map(e => e.message).join(', ') : 'Please try again';
+                alert('Failed to send message: ' + errorMsg);
+            }
+        } catch (error) {
+            console.error('Form submission error:', error);
+            alert('Network error. Please check your internet or email me directly at Renad.elsafi@outlook.com');
+        } finally {
+            if (this.submitBtn) {
+                this.submitBtn.disabled = false;
+                this.submitBtn.innerHTML = this.originalBtnText;
+            }
+        }
     }
 }
-
 // Initialize everything when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     // Initialize Theme Manager
