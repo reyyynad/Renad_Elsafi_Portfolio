@@ -21,6 +21,40 @@
     <title>Renad Elsafi Portfolio</title>
   </head>
   <body>
+
+    
+    <div class="name-modal-overlay" id="nameModalOverlay">
+      <div class="name-modal">
+          <div class="modal-icon">
+              <i class="fas fa-user-circle"></i>
+          </div>
+          <h2 class="modal-title">Welcome to My Portfolio!</h2>
+          <p class="modal-subtitle">I'd love to know who's visiting 😊</p>
+          
+          <div class="modal-input-group">
+              <label for="visitorNameInput">What's your name? (Optional)</label>
+              <input 
+                  type="text" 
+                  id="visitorNameInput" 
+                  placeholder="Enter your name..."
+                  maxlength="50"
+              >
+          </div>
+          
+          <div class="modal-actions">
+              <button class="modal-btn skip-btn" id="skipNameBtn">
+                  <i class="fas fa-arrow-right"></i> Skip
+              </button>
+              <button class="modal-btn submit-btn" id="submitNameBtn">
+                  <i class="fas fa-check"></i> Continue
+              </button>
+          </div>
+          
+          <p class="modal-note">
+              <i class="fas fa-lock"></i> Your name stays private on your device only
+          </p>
+      </div>
+  </div>
     <!-- NAVIGATION BAR -->
     <nav>
       <div class="left">

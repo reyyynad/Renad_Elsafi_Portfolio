@@ -904,3 +904,89 @@ document.addEventListener('DOMContentLoaded', () => {
 
     console.log('Portfolio initialized with all advanced features');
 });
+
+class DynamicGreeting {
+    constructor() {
+        this.greetingElement = document.getElementById('dynamicGreeting');
+        this.modalOverlay = document.getElementById('nameModalOverlay');
+        this.nameInput = document.getElementById('visitorNameInput');
+        this.submitBtn = document.getElementById('submitNameBtn');
+        this.skipBtn = document.getElementById('skipNameBtn');
+        this.init();
+    }
+   
+    init() {
+        if (this.greetingElement) {
+            const userName = localStorage.getItem('visitorName');
+            const greeting = this.getTimeBasedGreeting();
+            const name = userName || '<span class="name">Renad Elsafi</span>';
+            
+            if (userName) {
+                this.greetingElement.innerHTML = `${greeting} <span class="name">${userName}</span>! Welcome back to my portfolio.`;
+            } else {
+                this.greetingElement.innerHTML = `${greeting} I'm ${name}`;
+                this.showNameModal();
+            }
+        }
+    }
+    
+    showNameModal() {
+        setTimeout(() => {
+            this.modalOverlay.classList.add('active');
+        }, 2000); // Show after 2 seconds
+        
+        // Submit name
+        this.submitBtn.addEventListener('click', () => {
+            this.saveName();
+        });
+        
+        // Skip
+        this.skipBtn.addEventListener('click', () => {
+            this.closeModal();
+        });
+        
+        // Enter key to submit
+        this.nameInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                this.saveName();
+            }
+        });
+        
+        // Close on overlay click
+        this.modalOverlay.addEventListener('click', (e) => {
+            if (e.target === this.modalOverlay) {
+                this.closeModal();
+            }
+        });
+    }
+    
+    saveName() {
+        const name = this.nameInput.value.trim();
+        if (name) {
+            localStorage.setItem('visitorName', name);
+            const greeting = this.getTimeBasedGreeting();
+            this.greetingElement.innerHTML = `${greeting} <span class="name">${name}</span>! Welcome to my portfolio.`;
+            this.closeModal();
+        } else {
+            this.closeModal();
+        }
+    }
+    
+    closeModal() {
+        this.modalOverlay.classList.remove('active');
+    }
+   
+    getTimeBasedGreeting() {
+        const hour = new Date().getHours();
+       
+        if (hour >= 5 && hour < 12) {
+            return 'Good morning!';
+        } else if (hour >= 12 && hour < 17) {
+            return 'Good afternoon!';
+        } else if (hour >= 17 && hour < 21) {
+            return 'Good evening!';
+        } else {
+            return 'Good night!';
+        }
+    }
+}
