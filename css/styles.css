@@ -326,6 +326,14 @@ nav .right a:hover {
     box-shadow: 0 10px 30px rgba(168, 85, 247, 0.3);
 }
 
+.project-icon.pink {
+    background: linear-gradient(145deg, #F472B6, #EC4899);
+    box-shadow: 0 10px 30px rgba(244, 114, 182, 0.3);
+}
+
+
+
+
 .project-image {
     width: 80px;
     height: 80px;
