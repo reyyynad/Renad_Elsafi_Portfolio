@@ -204,21 +204,33 @@ class DynamicGreeting {
     }
    
     init() {
-        if (this.greetingElement) {
-            const userName = localStorage.getItem('visitorName');
-            const greeting = this.getTimeBasedGreeting();
-            const name = userName || '<span class="name">Renad Elsafi</span>';
-            
-            if (userName) {
-                this.greetingElement.innerHTML = `${greeting} <span class="name">${userName}</span>! Welcome back to my portfolio.`;
-            } else {
-                this.greetingElement.innerHTML = `${greeting} I'm ${name}`;
+        if (!this.greetingElement) {
+            console.warn('Greeting element not found');
+            return;
+        }
+        
+        const userName = localStorage.getItem('visitorName');
+        const greeting = this.getTimeBasedGreeting();
+        const name = userName || '<span class="name">Renad Elsafi</span>';
+        
+        if (userName) {
+            this.greetingElement.innerHTML = `${greeting} <span class="name">${userName}</span>! Welcome back to my portfolio.`;
+        } else {
+            this.greetingElement.innerHTML = `${greeting} I'm ${name}`;
+            // Only show modal if all modal elements exist
+            if (this.modalOverlay && this.nameInput && this.submitBtn && this.skipBtn) {
                 this.showNameModal();
             }
         }
     }
     
     showNameModal() {
+        // Double-check all elements exist before proceeding
+        if (!this.modalOverlay || !this.submitBtn || !this.skipBtn || !this.nameInput) {
+            console.warn('Modal elements not found - skipping name modal feature');
+            return;
+        }
+        
         setTimeout(() => {
             this.modalOverlay.classList.add('active');
         }, 2000); // Show after 2 seconds
@@ -249,6 +261,8 @@ class DynamicGreeting {
     }
     
     saveName() {
+        if (!this.nameInput || !this.greetingElement) return;
+        
         const name = this.nameInput.value.trim();
         if (name) {
             localStorage.setItem('visitorName', name);
@@ -261,6 +275,7 @@ class DynamicGreeting {
     }
     
     closeModal() {
+        if (!this.modalOverlay) return;
         this.modalOverlay.classList.remove('active');
     }
    
@@ -529,6 +544,33 @@ class GitHubRepos {
         if (diffDays < 30) return `${Math.floor(diffDays / 7)} weeks ago`;
         if (diffDays < 365) return `${Math.floor(diffDays / 30)} months ago`;
         return `${Math.floor(diffDays / 365)} years ago`;
+    }
+
+    async fetchRepositories() {
+        try {
+            this.showLoading();
+            
+            console.log('Fetching from:', this.apiUrl); // DEBUG
+            
+            const response = await fetch(this.apiUrl + '?sort=updated&per_page=6');
+            
+            console.log('Response status:', response.status); // DEBUG
+            console.log('Response ok:', response.ok); // DEBUG
+            
+            if (!response.ok) {
+                const errorText = await response.text();
+                console.error('API Error:', errorText); // DEBUG
+                throw new Error('Failed to fetch repositories');
+            }
+            
+            const repos = await response.json();
+            console.log('Repos received:', repos); // DEBUG
+            this.displayRepositories(repos);
+            
+        } catch (error) {
+            console.error('Error fetching repositories:', error);
+            this.showError();
+        }
     }
 }
 
