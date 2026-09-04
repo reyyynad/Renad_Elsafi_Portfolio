@@ -1,39 +1,33 @@
 // Theme management system
 class ThemeManager {
     constructor() {
-        this.themes = ['mono'];
+        this.themes = ['purple', 'light', 'dark'];
         this.currentThemeIndex = 0;
         this.themeToggle = document.getElementById('themeToggle');
         this.themeIcons = {
-            mono: 'fas fa-circle-half-stroke',
+            purple: 'fas fa-heart',
             light: 'fas fa-sun',
             dark: 'fas fa-moon'
         };
        
         this.init();
     }
-
- init() {
-    const savedTheme = localStorage.getItem('theme');
-
-    if (savedTheme && this.themes.includes(savedTheme)) {
-        this.currentThemeIndex = this.themes.indexOf(savedTheme);
-    }
-
-    this.applyTheme();
-
-    if (this.themeToggle) {
+   
+    init() {
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme && this.themes.includes(savedTheme)) {
+            this.currentThemeIndex = this.themes.indexOf(savedTheme);
+        }
+       
+        this.applyTheme();
         this.updateIcon();
-
-        this.themeToggle.addEventListener('click', () => {
-            this.toggleTheme();
-        });
+       
+        this.themeToggle.addEventListener('click', () => this.toggleTheme());
+       
+        setTimeout(() => {
+            document.body.style.transition = 'all 0.3s ease';
+        }, 100);
     }
-
-    setTimeout(() => {
-        document.body.style.transition = 'all 0.3s ease';
-    }, 100);
-}
    
     toggleTheme() {
         this.currentThemeIndex = (this.currentThemeIndex + 1) % this.themes.length;
@@ -54,11 +48,11 @@ class ThemeManager {
    
     updateIcon() {
         const currentTheme = this.themes[this.currentThemeIndex];
-        const nextTheme = 'mono';
+        const nextTheme = this.themes[(this.currentThemeIndex + 1) % this.themes.length];
         const iconElement = this.themeToggle.querySelector('i');
        
         iconElement.className = this.themeIcons[nextTheme];
-        this.themeToggle.title = 'Black & white manga style';
+        this.themeToggle.title = `Switch to ${nextTheme} theme`;
     }
    
     animateButton() {
@@ -199,7 +193,106 @@ class AnimationEnhancer {
     }
 }
 
-
+class DynamicGreeting {
+    constructor() {
+        this.greetingElement = document.getElementById('dynamicGreeting');
+        this.modalOverlay = document.getElementById('nameModalOverlay');
+        this.nameInput = document.getElementById('visitorNameInput');
+        this.submitBtn = document.getElementById('submitNameBtn');
+        this.skipBtn = document.getElementById('skipNameBtn');
+        this.init();
+    }
+   
+    init() {
+        if (!this.greetingElement) {
+            console.warn('Greeting element not found');
+            return;
+        }
+        
+        const userName = localStorage.getItem('visitorName');
+        const greeting = this.getTimeBasedGreeting();
+        const name = userName || '<span class="name">Renad Elsafi</span>';
+        
+        if (userName) {
+            this.greetingElement.innerHTML = `${greeting} <span class="name">${userName}</span>! Welcome back to my portfolio.`;
+        } else {
+            this.greetingElement.innerHTML = `${greeting} I'm ${name}`;
+            // Only show modal if all modal elements exist
+            if (this.modalOverlay && this.nameInput && this.submitBtn && this.skipBtn) {
+                this.showNameModal();
+            }
+        }
+    }
+    
+    showNameModal() {
+        // Double-check all elements exist before proceeding
+        if (!this.modalOverlay || !this.submitBtn || !this.skipBtn || !this.nameInput) {
+            console.warn('Modal elements not found - skipping name modal feature');
+            return;
+        }
+        
+        setTimeout(() => {
+            this.modalOverlay.classList.add('active');
+        }, 2000); // Show after 2 seconds
+        
+        // Submit name
+        this.submitBtn.addEventListener('click', () => {
+            this.saveName();
+        });
+        
+        // Skip
+        this.skipBtn.addEventListener('click', () => {
+            this.closeModal();
+        });
+        
+        // Enter key to submit
+        this.nameInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                this.saveName();
+            }
+        });
+        
+        // Close on overlay click
+        this.modalOverlay.addEventListener('click', (e) => {
+            if (e.target === this.modalOverlay) {
+                this.closeModal();
+            }
+        });
+    }
+    
+    saveName() {
+        if (!this.nameInput || !this.greetingElement) return;
+        
+        const name = this.nameInput.value.trim();
+        if (name) {
+            localStorage.setItem('visitorName', name);
+            const greeting = this.getTimeBasedGreeting();
+            this.greetingElement.innerHTML = `${greeting} <span class="name">${name}</span>! Welcome to my portfolio.`;
+            this.closeModal();
+        } else {
+            this.closeModal();
+        }
+    }
+    
+    closeModal() {
+        if (!this.modalOverlay) return;
+        this.modalOverlay.classList.remove('active');
+    }
+   
+    getTimeBasedGreeting() {
+        const hour = new Date().getHours();
+       
+        if (hour >= 5 && hour < 12) {
+            return 'Good morning!';
+        } else if (hour >= 12 && hour < 17) {
+            return 'Good afternoon!';
+        } else if (hour >= 17 && hour < 21) {
+            return 'Good evening!';
+        } else {
+            return 'Good night!';
+        }
+    }
+}
 
 // Visitor Statistics Tracker
 class VisitorTracker {
@@ -543,7 +636,7 @@ class QuotesManager {
             if (this.quoteLoading) this.quoteLoading.style.display = 'none';
             if (this.quoteContent) this.quoteContent.style.display = 'block';
             if (this.quoteText) this.quoteText.textContent = `"${text}"`;
-            if (this.quoteAuthor) this.quoteAuthor.textContent = `â€” ${author}`;
+            if (this.quoteAuthor) this.quoteAuthor.textContent = `— ${author}`;
         }, 500);
     }
 }
@@ -807,68 +900,45 @@ class ContactFormValidator {
         if (input) input.classList.remove('invalid');
     }
 
-async submitForm() {
+    async submitForm() {
+        if (!this.submitBtn) return;
 
-    try {
+        try {
+            this.submitBtn.disabled = true;
+            this.submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
 
-        this.submitBtn.disabled = true;
+            const formData = new FormData(this.form);
 
-        this.submitBtn.innerHTML =
-            '<i class="fas fa-spinner fa-spin"></i> Sending...';
+            const response = await fetch(this.form.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
 
-        const response = await fetch(this.form.action, {
-            method: "POST",
-            body: new FormData(this.form),
-            headers: {
-                Accept: "application/json"
+            if (response.ok) {
+                alert('Yay! Message sent successfully! Thank you for reaching out. I\'ll get back to you soon!');
+                this.form.reset();
+                document.getElementById('charCount').textContent = '0 / 1000';
+                this.clearError('name');
+                this.clearError('email');
+                this.clearError('message');
+            } else {
+                const data = await response.json();
+                const errorMsg = data.errors ? data.errors.map(e => e.message).join(', ') : 'Please try again';
+                alert('Failed to send message: ' + errorMsg);
             }
-        });
-
-        if (!response.ok) {
-            throw new Error("Failed");
+        } catch (error) {
+            console.error('Form submission error:', error);
+            alert('Network error. Please check your internet or email me directly at Renad.elsafi@outlook.com');
+        } finally {
+            if (this.submitBtn) {
+                this.submitBtn.disabled = false;
+                this.submitBtn.innerHTML = this.originalBtnText;
+            }
         }
-
-        this.form.reset();
-
-        const counter =
-            document.getElementById("charCount");
-
-        if (counter) {
-            counter.textContent = "0 / 1000";
-        }
-
-        const popup = document.createElement("div");
-
-        popup.className = "success-popup";
-
-        popup.innerHTML =
-            "Message sent successfully :)";
-
-        document.body.appendChild(popup);
-
-        setTimeout(() => {
-            popup.remove();
-        }, 3000);
-
     }
-    catch (error) {
-
-        console.error(error);
-
-        alert(
-            "Failed to send message. Please try again."
-        );
-
-    }
-    finally {
-
-        this.submitBtn.disabled = false;
-
-        this.submitBtn.innerHTML =
-            "Send!";
-
-    }
-}
 }
 // Initialize everything when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
@@ -881,6 +951,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize Animation Enhancer
     const animationEnhancer = new AnimationEnhancer();
 
+    // Initialize Dynamic Greeting with Visitor Name
+    const dynamicGreeting = new DynamicGreeting();
     
     // Initialize Visitor Tracker (Time counter & Visit count)
     const visitorTracker = new VisitorTracker();
@@ -900,36 +972,15 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize Contact Form Validator
     const contactFormValidator = new ContactFormValidator();
 
-const textarea =
-    document.getElementById("message");
+    // Character counter for message textarea
+    const textarea = document.getElementById('message');
+    const charCount = document.getElementById('charCount');
 
-const charCount =
-    document.getElementById("charCount");
-
-if (textarea && charCount) {
-
-    function updateCounter() {
-
-        charCount.textContent =
-            `${textarea.value.length} / 1000`;
-
+    if (textarea && charCount) {
+        textarea.addEventListener('input', () => {
+            charCount.textContent = `${textarea.value.length} / ${textarea.maxLength}`;
+        });
     }
 
-    updateCounter();
-
-    textarea.addEventListener(
-        "input",
-        updateCounter
-    );
-}
-
-const snailCursor = document.getElementById("snailCursor");
-
-if (snailCursor) {
-    document.addEventListener("mousemove", (event) => {
-        snailCursor.style.left = event.clientX + "px";
-        snailCursor.style.top = event.clientY + "px";
-    });
-}
-
+    console.log('Portfolio initialized with all advanced features');
 });
