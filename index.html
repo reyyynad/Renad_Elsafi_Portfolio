@@ -24,38 +24,6 @@
   
   <body>
     
-    <!-- <div class="name-modal-overlay" id="nameModalOverlay">
-      <div class="name-modal">
-          <div class="modal-icon">
-              <i class="fas fa-user-circle"></i>
-          </div>
-          <h2 class="modal-title">Welcome to My Portfolio!</h2>
-          <p class="modal-subtitle">I'd love to know who's visiting 😊</p>
-          
-          <div class="modal-input-group">
-              <label for="visitorNameInput">What's your name? (Optional)</label>
-              <input 
-                  type="text" 
-                  id="visitorNameInput" 
-                  placeholder="Enter your name..."
-                  maxlength="50"
-              >
-          </div>
-          
-          <div class="modal-actions">
-              <button class="modal-btn skip-btn" id="skipNameBtn">
-                  <i class="fas fa-arrow-right"></i> Skip
-              </button>
-              <button class="modal-btn submit-btn" id="submitNameBtn">
-                  <i class="fas fa-check"></i> Continue
-              </button>
-          </div>
-          
-          <p class="modal-note">
-              <i class="fas fa-lock"></i> Your name stays private on your device only
-          </p>
-      </div>
-  </div> -->
     <!-- NAVIGATION BAR -->
     <nav>
       <div class="left">
@@ -66,9 +34,6 @@
         <a href="#Projects">Projects</a>
         <a href="#Experience">Experience</a>
         <a href="#Contact">Contact</a>
-        <!-- <button class="theme-toggle" id="themeToggle">
-          <i class="fas fa-palette"></i>
-        </button> -->
       </div>
     </nav>
 
@@ -80,32 +45,6 @@
           <div class="hero-content">
             <div class="hero-image">
               <div class="character-container">
-                <!-- <div class="skills-orbit" aria-label="Skills">
-                  <span class="orbit-skill" style="--i: 0"><i class="devicon-figma-plain colored"></i><em>Figma</em></span>
-                  <span class="orbit-skill" style="--i: 1"><i class="devicon-flutter-plain colored"></i><em>Flutter</em></span>
-                  <span class="orbit-skill" style="--i: 2"><i class="devicon-dart-plain colored"></i><em>Dart</em></span>
-                  <span class="orbit-skill" style="--i: 3"><i class="devicon-javascript-plain colored"></i><em>JavaScript</em></span>
-                  <span class="orbit-skill" style="--i: 4"><i class="devicon-html5-plain colored"></i><em>HTML5</em></span>
-                  <span class="orbit-skill" style="--i: 5"><i class="devicon-css3-plain colored"></i><em>CSS3</em></span>
-                  <span class="orbit-skill" style="--i: 6"><i class="devicon-java-plain colored"></i><em>Java</em></span>
-                  <span class="orbit-skill" style="--i: 7"><i class="devicon-python-plain colored"></i><em>Python</em></span>
-                  <span class="orbit-skill" style="--i: 8"><i class="devicon-mysql-plain colored"></i><em>SQL</em></span>
-                  <span class="orbit-skill" style="--i: 9"><i class="devicon-git-plain colored"></i><em>Git</em></span>
-                  <span class="orbit-skill" style="--i: 10"><i class="fab fa-github"></i><em>GitHub</em></span>
-                  <span class="orbit-skill" style="--i: 11"><i class="devicon-react-original colored"></i><em>React</em></span>
-                  <span class="orbit-skill" style="--i: 12"><i class="devicon-mongodb-plain colored"></i><em>MongoDB</em></span>
-                  <span class="orbit-skill" style="--i: 13"><i class="devicon-supabase-plain colored"></i><em>Supabase</em></span>
-                  <span class="orbit-skill" style="--i: 14"><i class="devicon-firebase-plain colored"></i><em>Firebase</em></span>
-                  <span class="orbit-skill" style="--i: 15"><i class="devicon-streamlit-plain colored"></i><em>Streamlit</em></span>
-                  <span class="orbit-skill" style="--i: 16">
-                    <svg class="orbit-svg-icon" viewBox="0 0 24 24" aria-hidden="true">
-                      <rect x="3" y="12" width="4.5" height="9" rx="1" fill="#F2C811" />
-                      <rect x="9.75" y="7" width="4.5" height="14" rx="1" fill="#F2C811" />
-                      <rect x="16.5" y="3" width="4.5" height="18" rx="1" fill="#F2C811" />
-                    </svg>
-                    <em>Power BI</em>
-                  </span>
-                </div> -->
                 <img
                   src="assets/images/labtop_image.png"
                   alt="Character with laptop illustration"
@@ -271,44 +210,11 @@
         <div class="projects-container">
             <h1 class="projects-title">Projects</h1>
             
-            <!-- Filter and Sort Controls -->
-            <!-- <div class="project-controls">
-                <div class="filter-group">
-                    <label for="categoryFilter">
-                        <i class="fas fa-filter"></i> Filter by Category:
-                    </label>
-                    <select id="categoryFilter">
-                        <option value="all">All Projects</option>
-                        <option value="software">Software Engineering</option>
-                        <option value="oop">Object-Oriented Programming</option>
-                        <option value="web">Web Development</option>
-                    </select>
-                </div>
-                
-                <div class="sort-group">
-                    <label for="sortProjects">
-                        <i class="fas fa-sort"></i> Sort by:
-                    </label>
-                    <select id="sortProjects">
-                        <option value="date-desc">Newest First</option>
-                        <option value="date-asc">Oldest First</option>
-                        <option value="name-asc">Name (A-Z)</option>
-                        <option value="name-desc">Name (Z-A)</option>
-                    </select>
-                </div>
-            </div> -->
-            
             <div class="projects-grid" id="projectsGrid">
                 <div class="project-card" data-category="software" data-date="2024-05" data-name="KFUPM Registration System">
                     <div class="project-visual">
-                        <div class="project-icon pink">
-                            <img src="assets/images/bulb.png" alt="Project icon" class="project-image">
-                        </div>
-                        <div class="decorative-dots">
-                            <div class="dot dot-1"></div>
-                            <div class="dot dot-2"></div>
-                            <div class="dot dot-3"></div>
-                            <div class="dot dot-4"></div>
+                        <div class="project-visual-panel">
+                            <img src="assets/images/kfupm-registration.jpeg" alt="KFUPM Registration System screenshot" class="project-image-full">
                         </div>
                     </div>
                     <div class="project-content">
@@ -325,14 +231,8 @@
                
                 <div class="project-card" data-category="oop" data-date="2023-12" data-name="Facelite">
                     <div class="project-visual">
-                        <div class="project-icon orange">
-                            <img src="assets/images/bulb.png" alt="Project icon" class="project-image">
-                        </div>
-                        <div class="decorative-dots">
-                            <div class="dot dot-1"></div>
-                            <div class="dot dot-2"></div>
-                            <div class="dot dot-3"></div>
-                            <div class="dot dot-4"></div>
+                        <div class="project-visual-panel">
+                            <img src="assets/images/facelite.jpg" alt="Facelite app screenshot" class="project-image-full">
                         </div>
                     </div>
                     <div class="project-content">
@@ -347,44 +247,30 @@
                     </div>
                 </div>
 
-                <div class="project-card" data-category="web" data-date="2025-11" data-name="Portfolio Website">
+                <div class="project-card" data-category="mobile_app" data-date="2026-01" data-name="Infinity">
                     <div class="project-visual">
-                        <div class="project-icon teal">
-                            <img src="assets/images/bulb.png" alt="Project icon" class="project-image">
-                        </div>
-                        <div class="decorative-dots">
-                            <div class="dot dot-1"></div>
-                            <div class="dot dot-2"></div>
-                            <div class="dot dot-3"></div>
-                            <div class="dot dot-4"></div>
+                        <div class="project-visual-panel">
+                            <img src="assets/images/infinity.png" alt="Infinity app screenshot" class="project-image-full">
                         </div>
                     </div>
                     <div class="project-content">
-                        <h2 class="project-title">Portfolio Website</h2>
-                        <span class="project-category">Web Development</span>
-   
+                        <h2 class="project-title">Infinity</h2>
+                        <span class="project-category">Mobile App Development</span>
+
                         <ul class="project-features">
-                            <li>A modern, responsive portfolio website built with HTML, CSS, and JavaScript featuring API integration and advanced state management.</li>
+                            <li>Infinity is a Dhikr companion app for daily adhkar, memorial pages, and shared worship through an interactive counter, helping users stay consistent and spread goodness together.</li>
                         </ul>
-                        <a href="https://github.com/reyyynad/Renad_Elsafi_Portfolio">
-                            <button class="project-btn">See GITHUB!</button>
+                        <a href="https://apps.apple.com/sa/app/infinity-prayers/id6790789011">
+                            <button class="project-btn">Download now!</button>
                         </a>
                     </div>
-
-                    
                 </div>
 
 
                 <div class="project-card" data-category="mobile_app" data-date="2025-12" data-name="Darajati">
                   <div class="project-visual">
-                      <div class="project-icon purple">
-                          <img src="assets/images/bulb.png" alt="Project icon" class="project-image">
-                      </div>
-                      <div class="decorative-dots">
-                          <div class="dot dot-1"></div>
-                          <div class="dot dot-2"></div>
-                          <div class="dot dot-3"></div>
-                          <div class="dot dot-4"></div>
+                      <div class="project-visual-panel">
+                          <img src="assets/images/darajati.png" alt="Darajati app screenshot" class="project-image-full">
                       </div>
                   </div>
                   <div class="project-content">
@@ -412,6 +298,33 @@
       <section class="experience-section" id="Experience">
         <div class="experience-container">
             <h1 class="experience-title">Experience</h1>
+
+            <div class="experience-card">
+                <div class="experience-visual">
+                    <div class="experience-icon">
+                        <img src="assets/images/rocket.png" alt="Experience icon" class="experience-image">
+                    </div>
+                    <div class="decorative-dots-exp">
+                        <div class="dot dot-1"></div>
+                        <div class="dot dot-2"></div>
+                        <div class="dot dot-3"></div>
+                        <div class="dot dot-4"></div>
+                    </div>
+                </div>
+                <div class="experience-content">
+                    <div class="experience-header">
+                        <div class="experience-info">
+                            <h2 class="experience-title-job">Data Engineer Intern</h2>
+                            <p class="company-location">ACWA Power - Riyadh, Saudi Arabia</p>
+                        </div>
+                        <div class="experience-date">06/2026 - 08/2026</div>
+                    </div>
+                    <div class="experience-description">
+                        Completed an eight-week internship with ACWA Power's Digital Department, owning two projects end-to-end. Automated three Power BI dashboards on a proper Bronze-Silver-Gold data pipeline, redesigned with a modern look aligned to ACWA's visual identity. Also designed and built an interactive landing page website for the company.
+                    </div>
+                </div>
+            </div>
+
             <div class="experience-card">
                 <div class="experience-visual">
                     <div class="experience-icon">
@@ -595,43 +508,6 @@
 
 </section>
 
-      <!-- SECTION: GitHub Repositories (disabled)
-<section class="github-section" id="GitHub">
-    <div class="github-container">
-        <h1 class="github-title">
-            <i class="fab fa-github"></i> Latest from GitHub
-        </h1>
-        <p class="github-subtitle">Explore my recent projects and contributions</p>
-
-        Loading State
-        <div class="loading-state" id="loadingState">
-            <div class="spinner"></div>
-            <p>Loading repositories...</p>
-        </div>
-
-        Error State
-        <div class="error-state" id="errorState" style="display: none;">
-            <i class="fas fa-exclamation-triangle"></i>
-            <p>Oops! Couldn't load repositories. Please check your internet connection and try again.</p>
-            <button class="retry-btn" id="retryBtn">
-                <i class="fas fa-redo"></i> Try Again
-            </button>
-        </div>
-
-        Repositories Grid
-        <div class="repos-grid" id="reposGrid"></div>
-
-        View More Button
-        <div class="github-footer">
-            <a href="https://github.com/reyyynad" target="_blank" class="view-more-btn">
-                <i class="fab fa-github"></i> View All on GitHub
-                <i class="fas fa-arrow-right"></i>
-            </a>
-        </div>
-    </div>
-</section>
--->
- 
       <!-- SECTION4: Contacts -->
       <section class="contact-section" id="Contact">
         <div class="contact-container">
@@ -700,30 +576,6 @@
           </div>
         </div>
       </section>
-    <!-- QUOTES SECTION -->
-    <!-- <section class="quotes-section" id="Quotes">
-        <div class="quotes-container">
-            <h2 class="quotes-title">
-                <i class="fas fa-quote-left"></i> Daily Inspiration
-            </h2>
-            
-            <div class="quote-card" id="quoteCard">
-                <div class="quote-loading" id="quoteLoading">
-                    <div class="spinner-small"></div>
-                    <p>Loading inspiration...</p>
-                </div>
-                
-                <div class="quote-content" id="quoteContent" style="display: none;">
-                    <p class="quote-text" id="quoteText"></p>
-                    <p class="quote-author" id="quoteAuthor"></p>
-                </div>
-                
-                <button class="refresh-quote-btn" id="refreshQuote" title="Get New Quote">
-                    <i class="fas fa-sync-alt"></i> New Quote
-                </button>
-            </div>
-        </div>
-    </section> -->
 
     <footer>
       <p>© 2026 Renad Elsafi</p>
@@ -735,4 +587,4 @@
 </div>
     
   </body>
-</html>d
+</html>
